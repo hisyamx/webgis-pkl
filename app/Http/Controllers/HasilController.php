@@ -21,20 +21,20 @@ class HasilController extends Controller
     public function index()
     {
         $data = [
-            'nama' => 'hasil',
+            'title' => 'Hasil',
             'hasil' => $this->Hasil->AllData(),
         ];
-        return view('admin.hasil.index', $data);
+        return view('admin.hasil.v_ index', $data);
     }
 
     public function add()
     {
         $data = [
-            'nama' => 'Add Hasil',
-            'perkebunan' => $this->Perkebunan->AllData(),
+            'title' => 'Add hasil',
+            'jenjang' => $this->Perkebunan->AllData(),
             'wilayah' => $this->Wilayah->AllData(),
         ];
-        return view('admin.hasil.add', $data);
+        return view('admin.hasil.v_add', $data);
     }
 
     public function insert()
@@ -42,23 +42,23 @@ class HasilController extends Controller
         Request()->validate(
             [
                 'nama' => 'required',
-                'id_jenjang' => 'required',
+                'id' => 'required',
                 'status' => 'required',
-                'id_kecamatan' => 'required',
+                'id_wilayah' => 'required',
                 'alamat' => 'required',
                 'posisi' => 'required',
                 'deskripsi' => 'required',
                 'foto' => 'required|max:1024',
             ],
             [
-                'nama.required' => 'Wajib diisi !!!',
-                'id_jenjang.required' => 'Wajib diisi !!!',
-                'status.required' => 'Wajib diisi !!!',
-                'id_kecamatan.required' => 'Wajib diisi !!!',
-                'alamat.required' => 'Wajib diisi !!!',
-                'posisi.required' => 'Wajib diisi !!!',
-                'deskripsi.required' => 'Wajib diisi !!!',
-                'foto.required' => 'Wajib diisi !!!',
+                'nama_hasil.required' => 'Wajib diisi ',
+                'id.required' => 'Wajib diisi ',
+                'status.required' => 'Wajib diisi ',
+                'id_wilayah.required' => 'Wajib diisi ',
+                'alamat.required' => 'Wajib diisi ',
+                'posisi.required' => 'Wajib diisi ',
+                'deskripsi.required' => 'Wajib diisi ',
+                'foto.required' => 'Wajib diisi ',
                 'foto.max' => 'Foto Max 1024 KB',
             ]
         );
@@ -68,10 +68,10 @@ class HasilController extends Controller
         $file->move(public_path('foto'), $filename);
 
         $data = [
-            'nama' => Request()->nama,
-            'id_jenjang' => Request()->id_jenjang,
+            'nama_hasil' => Request()->nama_hasil,
+            'id' => Request()->id,
             'status' => Request()->status,
-            'id_kecamatan' => Request()->id_kecamatan,
+            'id_wilayah' => Request()->id_wilayah,
             'alamat' => Request()->alamat,
             'posisi' => Request()->posisi,
             'deskripsi' => Request()->deskripsi,
@@ -86,8 +86,8 @@ class HasilController extends Controller
         $data = [
             'title' => 'Edit hasil',
             'hasil'   => $this->Hasil->DetailData($id_hasil),
-            'jenjang' => $this->JenjangModel->AllData(),
-            'kecamatan' => $this->KecamatanModel->AllData(),
+            'jenjang' => $this->Perkebunan->AllData(),
+            'wilayah' => $this->Wilayah->AllData(),
         ];
         return view('admin.hasil.v_edit', $data);
     }
@@ -96,23 +96,23 @@ class HasilController extends Controller
     {
         Request()->validate(
             [
-                'nama' => 'required',
-                'id_jenjang' => 'required',
+                'nama_hasil' => 'required',
+                'id' => 'required',
                 'status' => 'required',
-                'id_kecamatan' => 'required',
+                'id_wilayah' => 'required',
                 'alamat' => 'required',
                 'posisi' => 'required',
                 'deskripsi' => 'required',
                 'foto' => 'max:1024',
             ],
             [
-                'nama.required' => 'Wajib diisi !!!',
-                'id_jenjang.required' => 'Wajib diisi !!!',
-                'status.required' => 'Wajib diisi !!!',
-                'id_kecamatan.required' => 'Wajib diisi !!!',
-                'alamat.required' => 'Wajib diisi !!!',
-                'posisi.required' => 'Wajib diisi !!!',
-                'deskripsi.required' => 'Wajib diisi !!!',
+                'nama_hasil.required' => 'Wajib diisi ',
+                'id.required' => 'Wajib diisi ',
+                'status.required' => 'Wajib diisi ',
+                'id_wilayah.required' => 'Wajib diisi ',
+                'alamat.required' => 'Wajib diisi ',
+                'posisi.required' => 'Wajib diisi ',
+                'deskripsi.required' => 'Wajib diisi ',
                 'foto.max' => 'Foto Max 1024 KB',
             ]
         );
@@ -129,10 +129,10 @@ class HasilController extends Controller
             $file->move(public_path('foto'), $filename);
 
             $data = [
-                'nama' => Request()->nama,
-                'id_jenjang' => Request()->id_jenjang,
+                'nama_hasil' => Request()->nama_hasil,
+                'id' => Request()->id,
                 'status' => Request()->status,
-                'id_kecamatan' => Request()->id_kecamatan,
+                'id_wilayah' => Request()->id_wilayah,
                 'alamat' => Request()->alamat,
                 'posisi' => Request()->posisi,
                 'deskripsi' => Request()->deskripsi,
@@ -142,17 +142,17 @@ class HasilController extends Controller
         } else {
             //jika tidak ganti foto
             $data = [
-                'nama' => Request()->nama,
-                'id_jenjang' => Request()->id_jenjang,
+                'nama_hasil' => Request()->nama_hasil,
+                'id' => Request()->id,
                 'status' => Request()->status,
-                'id_kecamatan' => Request()->id_kecamatan,
+                'id_wilayah' => Request()->id_wilayah,
                 'alamat' => Request()->alamat,
                 'posisi' => Request()->posisi,
                 'deskripsi' => Request()->deskripsi,
             ];
             $this->Hasil->UpdateData($id_hasil, $data);
         }
-        return redirect()->route('hasil')->with('pesan', 'Data Berhasil Di Update.!!!');
+        return redirect()->route('hasil')->with('pesan', 'Data Berhasil Di Update.');
     }
 
     public function delete($id_hasil)
@@ -163,6 +163,6 @@ class HasilController extends Controller
             unlink(public_path('foto') . '/' . $hasil->foto);
         }
         $this->Hasil->DeleteData($id_hasil);
-        return redirect()->route('hasil')->with('pesan', 'Data Berhasil Di Delete.!!!');
+        return redirect()->route('hasil')->with('pesan', 'Data Berhasil Di Delete.');
     }
 }

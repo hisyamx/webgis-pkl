@@ -24,7 +24,7 @@ class CreateHasilsTable extends Migration
 
             $table->dateTime('tahun')->nullable();
 
-            $table->string('cover_image')->nullable();
+            $table->string('foto')->nullable();
             $table->string('deskripsi');
 
             $table->timestamps();
