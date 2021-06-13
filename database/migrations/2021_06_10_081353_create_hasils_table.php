@@ -15,6 +15,18 @@ class CreateHasilsTable extends Migration
     {
         Schema::create('hasils', function (Blueprint $table) {
             $table->id();
+            $table->string('nama');
+            $table->string('jenis');
+
+            $table->string('jumlah');
+            $table->string('posisi');
+            $table->string('alamat');
+
+            $table->dateTime('tahun')->nullable();
+
+            $table->string('cover_image')->nullable();
+            $table->string('deskripsi');
+
             $table->timestamps();
         });
     }

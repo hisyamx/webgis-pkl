@@ -7,6 +7,9 @@ use App\Http\Controllers\KecamatanController;
 use App\Http\Controllers\JenjangController;
 use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WilayahController;
+use App\Http\Controllers\PerkebunanController;
+use App\Http\Controllers\HasilController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -48,6 +51,38 @@ Route::get('/sekolah/edit/{id_sekolah}', [SekolahController::class, 'edit']);
 Route::post('/sekolah/update/{id_sekolah}', [SekolahController::class, 'update']);
 Route::get('/sekolah/delete/{id_sekolah}', [SekolahController::class, 'delete']);
 
+
+//frontend
+Route::get('/kecamatan/{id_kecamatan}', [WebController::class, 'kecamatan']);
+Route::get('/jenjang/{id_jenjang}', [WebController::class, 'jenjang']);
+Route::get('/detailsekolah/{id_sekolah}', [WebController::class, 'detailsekolah']);
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+
+//wilayah
+Route::get('/wilayah', [WilayahController::class, 'index'])->name('wilayah');
+Route::get('/wilayah/add', [WilayahController::class, 'add']);
+Route::post('/wilayah/insert', [WilayahController::class, 'insert']);
+Route::get('/wilayah/edit/{id_wilayah}', [WilayahController::class, 'edit']);
+Route::post('/wilayah/update/{id_wilayah}', [WilayahController::class, 'update']);
+Route::get('/wilayah/delete/{id_wilayah}', [WilayahController::class, 'delete']);
+
+//perkebunan
+Route::get('/perkebunan', [PerkebunanController::class, 'index'])->name('perkebunan');
+Route::get('/perkebunan/add', [PerkebunanController::class, 'add']);
+Route::post('/perkebunan/insert', [PerkebunanController::class, 'insert']);
+Route::get('/perkebunan/edit/{id_perkebunan}', [PerkebunanController::class, 'edit']);
+Route::post('/perkebunan/update/{id_perkebunan}', [PerkebunanController::class, 'update']);
+Route::get('/perkebunan/delete/{id_perkebunan}', [PerkebunanController::class, 'delete']);
+
+//hasil
+Route::get('/hasil', [HasilController::class, 'index'])->name('hasil');
+Route::get('/hasil/add', [HasilController::class, 'add']);
+Route::post('/hasil/insert', [HasilController::class, 'insert']);
+Route::get('/hasil/edit/{id_hasil}', [HasilController::class, 'edit']);
+Route::post('/hasil/update/{id_hasil}', [HasilController::class, 'update']);
+Route::get('/hasil/delete/{id_hasil}', [HasilController::class, 'delete']);
+
 //user
 Route::get('/user', [UserController::class, 'index'])->name('user');
 Route::get('/user/add', [UserController::class, 'add']);
@@ -58,6 +93,6 @@ Route::get('/user/delete/{id}', [UserController::class, 'delete']);
 
 
 //frontend
-Route::get('/kecamatan/{id_kecamatan}', [WebController::class, 'kecamatan']);
-Route::get('/jenjang/{id_jenjang}', [WebController::class, 'jenjang']);
-Route::get('/detailsekolah/{id_sekolah}', [WebController::class, 'detailsekolah']);
+Route::get('/wilayah/{id}', [WebController::class, 'wilayah']);
+Route::get('/perkebunan/{id}', [WebController::class, 'perkebunan']);
+Route::get('/detailhasil/{id}', [WebController::class, 'detailhasil']);

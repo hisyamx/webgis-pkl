@@ -15,6 +15,13 @@ class CreateWilayahsTable extends Migration
     {
         Schema::create('wilayahs', function (Blueprint $table) {
             $table->id();
+            $table->string('nama');
+            // $table->enum('role', [1, 2, 3]);
+
+            $table->string('geojson')->nullable();
+            $table->string('luas')->nullable();
+
+            $table->string('warna');
             $table->timestamps();
         });
     }

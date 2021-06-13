@@ -15,6 +15,13 @@ class CreatePerkebunansTable extends Migration
     {
         Schema::create('perkebunans', function (Blueprint $table) {
             $table->id();
+            $table->string('nama');
+            $table->string('luas');
+
+            $table->string('ikon')->nullable();
+
+            $table->timestamps();
+
             $table->timestamps();
         });
     }
