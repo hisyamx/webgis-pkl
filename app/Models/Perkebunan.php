@@ -21,23 +21,23 @@ class Perkebunan extends Model
             ->insert($data);
     }
 
-    public function DetailData($id)
+    public function DetailData($id_perkebunan)
     {
         return DB::table('perkebunan')
-            ->where('id', $id)->first();
+            ->where('id_perkebunan', $id_perkebunan)->first();
     }
 
-    public function UpdateData($id, $data)
+    public function UpdateData($id_perkebunan, $data)
     {
         DB::table('perkebunan')
-            ->where('id', $id)
+            ->where('id_perkebunan', $id_perkebunan)
             ->update($data);
     }
 
-    public function DeleteData($id)
+    public function DeleteData($id_perkebunan)
     {
         DB::table('perkebunan')
-            ->where('id', $id)
+            ->where('id_perkebunan', $id_perkebunan)
             ->delete();
     }
 }

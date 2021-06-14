@@ -12,8 +12,8 @@ class Hasil extends Model
     public function AllData()
     {
         return DB::table('hasil')
-            ->join('perkebunan', 'perkebunan.id', '=', 'hasil.id')
-            ->join('wilayah', 'wilayah.id', '=', 'hasil.id')
+            ->join('perkebunan', 'perkebunan.id_hasil', '=', 'hasil.id_hasil')
+            ->join('wilayah', 'wilayah.id_hasil', '=', 'hasil.id_hasil')
             ->get();
     }
 
@@ -23,25 +23,25 @@ class Hasil extends Model
             ->insert($data);
     }
 
-    public function DetailData($id)
+    public function DetailData($id_hasil)
     {
         return DB::table('hasil')
-            ->join('perkebunan', 'perkebunan.id', '=', 'hasil.id')
-            ->join('wilayah', 'wilayah.id', '=', 'hasil.id')
-            ->where('id', $id)->first();
+            ->join('perkebunan', 'perkebunan.id_hasil', '=', 'hasil.id_hasil')
+            ->join('wilayah', 'wilayah.id_hasil', '=', 'hasil.id_hasil')
+            ->where('id_hasil', $id_hasil)->first();
     }
 
-    public function UpdateData($id, $data)
+    public function UpdateData($id_hasil, $data)
     {
         DB::table('hasil')
-            ->where('id', $id)
+            ->where('id_hasil', $id_hasil)
             ->update($data);
     }
 
-    public function DeleteData($id)
+    public function DeleteData($id_hasil)
     {
         DB::table('hasil')
-            ->where('id', $id)
+            ->where('id_hasil', $id_hasil)
             ->delete();
     }
 }

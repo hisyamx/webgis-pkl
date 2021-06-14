@@ -14,13 +14,11 @@ class CreatePerkebunansTable extends Migration
     public function up()
     {
         Schema::create('perkebunans', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id_perkebunan');
             $table->string('nama');
             $table->string('luas');
 
             $table->string('ikon')->nullable();
-
-            $table->timestamps();
 
             $table->timestamps();
         });

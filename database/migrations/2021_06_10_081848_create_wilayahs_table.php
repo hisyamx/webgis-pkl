@@ -14,7 +14,7 @@ class CreateWilayahsTable extends Migration
     public function up()
     {
         Schema::create('wilayahs', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id_wilayah');
             $table->string('nama');
             // $table->enum('role', [1, 2, 3]);
 

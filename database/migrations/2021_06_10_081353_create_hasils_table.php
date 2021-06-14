@@ -14,7 +14,7 @@ class CreateHasilsTable extends Migration
     public function up()
     {
         Schema::create('hasils', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id_hasil');
             $table->string('nama');
             $table->string('jenis');
 

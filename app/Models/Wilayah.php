@@ -21,23 +21,23 @@ class wilayah extends Model
             ->insert($data);
     }
 
-    public function DetailData($id)
+    public function DetailData($id_wilayah)
     {
         return DB::table('wilayah')
-            ->where('id_kecamatan', $id)->first();
+            ->where('id_wilayah', $id_wilayah)->first();
     }
 
-    public function UpdateData($id, $data)
+    public function UpdateData($id_wilayah, $data)
     {
         DB::table('wilayah')
-            ->where('id_kecamatan', $id)
+            ->where('id_wilayah', $id_wilayah)
             ->update($data);
     }
 
-    public function DeleteData($id)
+    public function DeleteData($id_wilayah)
     {
         DB::table('wilayah')
-            ->where('id_kecamatan', $id)
+            ->where('id_wilayah', $id_wilayah)
             ->delete();
     }
 }
