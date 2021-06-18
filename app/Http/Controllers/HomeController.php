@@ -24,4 +24,16 @@ class HomeController extends Controller
         ];
         return view('v_home', $data);
     }
+
+    // public function index()
+    // {
+    //     $data = [
+    //         'title' => 'Dashboard',
+    //         'wilayah' => DB::table('wilayah')->count(),
+    //         'perkebunan' => DB::table('perkebunan')->count(),
+    //         'hasil' => DB::table('hasil')->count(),
+    //         'user' => DB::table('users')->count(),
+    //     ];
+    //     return view('home', $data);
+    // }
 }

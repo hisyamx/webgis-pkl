@@ -34,25 +34,25 @@ class WilayahController extends Controller
     {
         Request()->validate(
             [
-                'wilayah' => 'required',
-                'warna' => 'required',
-                'luas' => 'required',
+                'nama' => 'required',
                 'geojson' => 'required',
+                'luas' => 'required',
+                'warna' => 'required',
             ],
             [
-                'wilayah.required' => 'Wajib diisi',
-                'warna.required' => 'Wajib diisi',
-                'luas.required' => 'Wajib diisi',
+                'nama.required' => 'Wajib diisi',
                 'geojson.required' => 'Wajib diisi',
+                'luas.required' => 'Wajib diisi',
+                'warna.required' => 'Wajib diisi',
             ]
         );
         //jika validasinya tidak ada maka lakukan simpan data ke database
 
         $data = [
-            'wilayah' => Request()->wilayah,
-            'warna' => Request()->warna,
-            'luas' => Request()->luas,
+            'nama' => Request()->nama,
             'geojson' => Request()->geojson,
+            'luas' => Request()->luas,
+            'warna' => Request()->warna,
         ];
         $this->Wilayah->InsertData($data);
         return redirect()->route('wilayah')->with('pesan', 'Data Berhasil Di Tambahkan');
@@ -71,25 +71,25 @@ class WilayahController extends Controller
     {
         Request()->validate(
             [
-                'wilayah' => 'required',
-                'warna' => 'required',
-                'luas' => 'required',
+                'nama' => 'required',
                 'geojson' => 'required',
+                'luas' => 'required',
+                'warna' => 'required',
             ],
             [
-                'wilayah.required' => 'Wajib diisi',
-                'warna.required' => 'Wajib diisi',
-                'luas.required' => 'Wajib diisi',
+                'nama.required' => 'Wajib diisi',
                 'geojson.required' => 'Wajib diisi',
+                'luas.required' => 'Wajib diisi',
+                'warna.required' => 'Wajib diisi',
             ]
         );
         //jika validasinya tidak ada maka lakukan simpan data ke database
 
         $data = [
-            'wilayah' => Request()->wilayah,
-            'warna' => Request()->warna,
-            'luas' => Request()->warna,
+            'nama' => Request()->wilayah,
+            'luas' => Request()->luas,
             'geojson' => Request()->geojson,
+            'warna' => Request()->warna,
         ];
         $this->Wilayah->UpdateData($id_wilayah, $data);
         return redirect()->route('wilayah')->with('pesan', 'Data Berhasil Di Update.');

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePerkebunansTable extends Migration
+class CreatePerkebunanTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreatePerkebunansTable extends Migration
      */
     public function up()
     {
-        Schema::create('perkebunans', function (Blueprint $table) {
+        Schema::create('perkebunan', function (Blueprint $table) {
             $table->bigIncrements('id_perkebunan');
             $table->string('nama');
             $table->string('luas');
@@ -31,6 +31,6 @@ class CreatePerkebunansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('perkebunans');
+        Schema::dropIfExists('perkebunan');
     }
 }

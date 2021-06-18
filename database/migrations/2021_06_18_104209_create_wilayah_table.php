@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateWilayahsTable extends Migration
+class CreateWilayahTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateWilayahsTable extends Migration
      */
     public function up()
     {
-        Schema::create('wilayahs', function (Blueprint $table) {
+        Schema::create('wilayah', function (Blueprint $table) {
             $table->bigIncrements('id_wilayah');
             $table->string('nama');
             // $table->enum('role', [1, 2, 3]);
@@ -33,6 +33,6 @@ class CreateWilayahsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('wilayahs');
+        Schema::dropIfExists('wilayah');
     }
 }

@@ -21,50 +21,50 @@ class View extends Model
             ->get();
     }
 
-    public function DetailPerkebunan($id)
+    public function DetailPerkebunan($id_perkebunan)
     {
         return DB::table('perkebunan')
-            ->where('id', $id)->first();
+            ->where('id_perkebunan', $id_perkebunan)->first();
     }
 
-    public function DataHasilPerkebunan($id)
+    public function DataHasilPerkebunan($id_perkebunan)
     {
         return DB::table('hasil')
-            ->join('perkebunan', 'perkebunan.id', '=', 'hasil.id')
-            ->join('wilayah', 'wilayah.id', '=', 'hasil.id')
-            ->where('hasil.id', $id)
+            ->join('perkebunan', 'perkebunan.id_perkebunan', '=', 'hasil.id_perkebunan')
+            ->join('wilayah', 'wilayah.id_wilayah', '=', 'hasil.id_wilayah')
+            ->where('hasil.id_hasil', $id_perkebunan)
             ->get();
     }
 
-    public function DetailWilayah($id)
+    public function DetailWilayah($id_wilayah)
     {
         return DB::table('wilayah')
-            ->where('id', $id)->first();
+            ->where('id_wilayah', $id_wilayah)->first();
     }
 
-    public function DataHasil($id)
+    public function DataHasil($id_wilayah)
     {
         return DB::table('hasil')
-            ->join('perkebunan', 'perkebunan.id', '=', 'hasil.id')
-            ->join('wilayah', 'wilayah.id', '=', 'hasil.id')
-            ->where('hasil.id', $id)
+            ->join('perkebunan', 'perkebunan.id_perkebunan', '=', 'hasil.id_perkebunan')
+            ->join('wilayah', 'wilayah.id_wilayah', '=', 'hasil.id_wilayah')
+            ->where('hasil.id', $id_wilayah)
             ->get();
     }
 
     public function AllDataHasil()
     {
         return DB::table('hasil')
-            ->join('perkebunan', 'perkebunan.id', '=', 'hasil.id')
-            ->join('wilayah', 'wilayah.id', '=', 'hasil.id')
+            ->join('perkebunan', 'perkebunan.id_perkebunan', '=', 'hasil.id_perkebunan')
+            ->join('wilayah', 'wilayah.id_wilayah', '=', 'hasil.id_wilayah')
             ->get();
     }
 
-    public function DetailDataHasil($id)
+    public function DetailDataHasil($id_hasil)
     {
         return DB::table('hasil')
-            ->join('perkebunan', 'perkebunan.id', '=', 'hasil.id')
-            ->join('wilayah', 'wilayah.id', '=', 'hasil.id')
-            ->where('id', $id)
+            ->join('perkebunan', 'perkebunan.id_perkebunan', '=', 'hasil.id_perkebunan')
+            ->join('wilayah', 'wilayah.id_wilayah', '=', 'hasil.id_wilayah')
+            ->where('id', $id_hasil)
             ->first();
     }
 }

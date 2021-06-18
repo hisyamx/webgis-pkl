@@ -20,7 +20,7 @@ class ViewController extends Controller
             'hasil' => $this->View->AllDataHasil(),
             'perkebunan' => $this->View->DataPerkebunan(),
         ];
-        return view('view', $data);
+        return view('web', $data);
     }
 
     public function wilayah($id)

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\WebController;
+use App\Http\Controllers\ViewController;
 use App\Http\Controllers\KecamatanController;
 use App\Http\Controllers\JenjangController;
 use App\Http\Controllers\SekolahController;
@@ -21,11 +22,12 @@ use App\Http\Controllers\HasilController;
 |
 */
 
-Route::get('/', [WebController::class, 'index']);
+// Route::get('/', [WebController::class, 'index']);
+Route::get('/', [ViewController::class, 'index'])->name('user.dashboard');
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard.index');
 
 //Kecamatan
 Route::get('/kecamatan', [KecamatanController::class, 'index'])->name('kecamatan');
@@ -60,39 +62,39 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
 //wilayah
-Route::get('/wilayah', [WilayahController::class, 'index'])->name('wilayah');
-Route::get('/wilayah/add', [WilayahController::class, 'add']);
+Route::get('/wilayah', [WilayahController::class, 'index'])->name('wilayah.index');
+Route::get('/wilayah/add', [WilayahController::class, 'add'])->name('wilayah.add');
 Route::post('/wilayah/insert', [WilayahController::class, 'insert']);
-Route::get('/wilayah/edit/{id_wilayah}', [WilayahController::class, 'edit']);
-Route::post('/wilayah/update/{id_wilayah}', [WilayahController::class, 'update']);
-Route::get('/wilayah/delete/{id_wilayah}', [WilayahController::class, 'delete']);
+Route::get('/wilayah/edit/{id_wilayah}', [WilayahController::class, 'edit'])->name('wilayah.edit');
+Route::post('/wilayah/update/{id_wilayah}', [WilayahController::class, 'update'])->name('wilayah.update');
+Route::get('/wilayah/delete/{id_wilayah}', [WilayahController::class, 'delete'])->name('wilayah.delete');
 
 //perkebunan
-Route::get('/perkebunan', [PerkebunanController::class, 'index'])->name('perkebunan');
-Route::get('/perkebunan/add', [PerkebunanController::class, 'add']);
+Route::get('/perkebunan', [PerkebunanController::class, 'index'])->name('perkebunan.index');
+Route::get('/perkebunan/add', [PerkebunanController::class, 'add'])->name('perkebunan.add');
 Route::post('/perkebunan/insert', [PerkebunanController::class, 'insert']);
-Route::get('/perkebunan/edit/{id_perkebunan}', [PerkebunanController::class, 'edit']);
-Route::post('/perkebunan/update/{id_perkebunan}', [PerkebunanController::class, 'update']);
-Route::get('/perkebunan/delete/{id_perkebunan}', [PerkebunanController::class, 'delete']);
+Route::get('/perkebunan/edit/{id_perkebunan}', [PerkebunanController::class, 'edit'])->name('perkebunan.edit');
+Route::post('/perkebunan/update/{id_perkebunan}', [PerkebunanController::class, 'update'])->name('perkebunan.update');
+Route::get('/perkebunan/delete/{id_perkebunan}', [PerkebunanController::class, 'delete'])->name('perkebunan.delete');
 
 //hasil
-Route::get('/hasil', [HasilController::class, 'index'])->name('hasil');
-Route::get('/hasil/add', [HasilController::class, 'add']);
+Route::get('/hasil', [HasilController::class, 'index'])->name('hasil.index');
+Route::get('/hasil/add', [HasilController::class, 'add'])->name('hasil.add');
 Route::post('/hasil/insert', [HasilController::class, 'insert']);
-Route::get('/hasil/edit/{id_hasil}', [HasilController::class, 'edit']);
-Route::post('/hasil/update/{id_hasil}', [HasilController::class, 'update']);
-Route::get('/hasil/delete/{id_hasil}', [HasilController::class, 'delete']);
+Route::get('/hasil/edit/{id_hasil}', [HasilController::class, 'edit'])->name('hasil.edit');
+Route::post('/hasil/update/{id_hasil}', [HasilController::class, 'update'])->name('hasil.update');
+Route::get('/hasil/delete/{id_hasil}', [HasilController::class, 'delete'])->name('hasil.delete');
 
 //user
-Route::get('/user', [UserController::class, 'index'])->name('user');
-Route::get('/user/add', [UserController::class, 'add']);
+Route::get('/user', [UserController::class, 'index'])->name('user.index');
+Route::get('/user/add', [UserController::class, 'add'])->name('user.add');
 Route::post('/user/insert', [UserController::class, 'insert']);
-Route::get('/user/edit/{id}', [UserController::class, 'edit']);
-Route::post('/user/update/{id}', [UserController::class, 'update']);
-Route::get('/user/delete/{id}', [UserController::class, 'delete']);
+Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
+Route::post('/user/update/{id}', [UserController::class, 'update'])->name('user.update');
+Route::get('/user/delete/{id}', [UserController::class, 'delete'])->name('user.delete');
 
 
 //frontend
-Route::get('/wilayah/{id}', [WebController::class, 'wilayah']);
-Route::get('/perkebunan/{id}', [WebController::class, 'perkebunan']);
-Route::get('/detailhasil/{id}', [WebController::class, 'detailhasil']);
+Route::get('/wilayah/{id_wilayah}', [ViewController::class, 'wilayah']);
+Route::get('/perkebunan/{id_perkebunan}', [ViewController::class, 'perkebunan']);
+Route::get('/detailhasil/{id_hasil}', [ViewController::class, 'detailhasil']);
