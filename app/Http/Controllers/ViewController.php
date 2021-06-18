@@ -15,7 +15,7 @@ class ViewController extends Controller
     public function index()
     {
         $data = [
-            'title' => 'Pemetaan',
+            'title' => 'Wilayah',
             'wilayah' => $this->View->DataWilayah(),
             'hasil' => $this->View->AllDataHasil(),
             'perkebunan' => $this->View->DataPerkebunan(),
@@ -39,7 +39,7 @@ class ViewController extends Controller
     {
         $perkebunan = $this->View->DetailPerkebunan($id);
         $data = [
-            'title' => 'perkebunan ' . $perkebunan->perkebunan,
+            'title' => 'Perkebunan ' . $perkebunan->perkebunan,
             'wilayah' => $this->View->DataWilayah(),
             'hasil' => $this->View->DataHasilPerkebunan($id),
             'perkebunan' => $this->View->DataPerkebunan(),

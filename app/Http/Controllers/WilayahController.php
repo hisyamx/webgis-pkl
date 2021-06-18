@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Apps\models\Wilayah;
+use App\Models\Wilayah;
 
 class WilayahController extends Controller
 {
@@ -19,7 +19,7 @@ class WilayahController extends Controller
             'title' => 'Wilayah',
             'wilayah' => $this->Wilayah->AllData(),
         ];
-        return view('admin.wilayah.v_index', $data);
+        return view('admin.wilayah.index', $data);
     }
 
     public function add()
@@ -27,7 +27,7 @@ class WilayahController extends Controller
         $data = [
             'title' => 'Add Data Wilayah',
         ];
-        return view('admin.wilayah.v_add', $data);
+        return view('admin.wilayah.add', $data);
     }
 
     public function insert()
@@ -64,7 +64,7 @@ class WilayahController extends Controller
             'title' => 'edit Data wilayah',
             'wilayah' => $this->Wilayah->DetailData($id_wilayah),
         ];
-        return view('admin.wilayah.v_edit', $data);
+        return view('admin.wilayah.edit', $data);
     }
 
     public function update($id_wilayah)
@@ -100,5 +100,4 @@ class WilayahController extends Controller
         $this->Wilayah->DeleteData($id_wilayah);
         return redirect()->route('wilayah')->with('pesan', 'Data Berhasil Di Delete.');
     }
-
 }
