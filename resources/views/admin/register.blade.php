@@ -5,10 +5,7 @@
         <meta charset="utf-8">
         <link href="{{  asset('dist') }}/images/logo.svg" rel="shortcut icon">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="Icewall admin is super flexible, powerful, clean & modern responsive tailwind admin template with unlimited possibilities.">
-        <meta name="keywords" content="admin template, Icewall Admin Template, dashboard template, flat admin template, responsive admin template, web app">
-        <meta name="author" content="LEFT4CODE">
-        <title>Login Dashboard</title>
+        <title>Register Dashboard</title>
         <!-- BEGIN: CSS Assets-->
         <link rel="stylesheet" href="{{  asset('dist') }}/css/app.css" />
         <!-- END: CSS Assets-->
@@ -33,40 +30,48 @@
                         </div>
                     </div>
                 </div>
-                <!-- END: Login Info -->
-                <!-- BEGIN: Login Form -->
+                <!-- END: Register Info -->
+                <!-- BEGIN: Register Form -->
                 <div class="h-screen xl:h-auto flex py-5 xl:py-0 my-10 xl:my-0">
                     <div class="my-auto mx-auto xl:ml-20 bg-white dark:bg-dark-1 xl:bg-transparent px-5 sm:px-8 py-8 xl:p-0 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto">
                         <h2 class="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">
-                            Sign In
+                            Sign Up
                         </h2>
-                        <form method="POST" action="{{ route('login') }}">
+                        <form method="POST" action="{{ route('register') }}">
                         @csrf
-                            <div class="intro-x mt-2 text-gray-500 xl:hidden text-center">A few more clicks to sign in to your account.</div>
                             <div class="intro-x mt-8">
-                                <input type="email" class="intro-x login__input form-control py-3 px-4 border-gray-300 block" placeholder="Email" id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                <label for="nama">{{ __('Nama') }}</label>
+                                <input type="text" class="intro-x login__input form-control py-3 px-4 border-gray-300 block" id="nama" type="nama" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama') }}" required autofocus>
+                                @error('nama')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="intro-x mt-8">
+                                <label for="email">{{ __('Alamat Email') }}</label>
+                                <input type="email" class="intro-x login__input form-control py-3 px-4 border-gray-300 block mt-4" id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
                                 @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                             <div class="intro-x mt-8">
-                                <input class="intro-x login__input form-control py-3 px-4 border-gray-300 block mt-4" placeholder="Password" id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                <label for="password">{{ __('Password') }}</label>
+                                <input class="intro-x login__input form-control py-3 px-4 border-gray-300 block mt-4" id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
                                 @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
-                            <div class="intro-x flex text-gray-700 dark:text-gray-600 text-xs sm:text-sm mt-4">
-                                <div class="flex items-center mr-auto">
-                                    <input id="remember-me" type="checkbox" class="form-check-input border mr-2">
-                                    <label class="cursor-pointer select-none" for="remember-me">Remember me</label>
-                                </div>
+                            <div class="intro-x mt-8">
+                                <label for="password-confirm">{{ __('Konfirmasi Password') }}</label>
+                                <input class="intro-x login__input form-control py-3 px-4 border-gray-300 block mt-4" id="password-confirm" type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" required autocomplete="new-password">
                             </div>
                             <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">
-                                <button class="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top">{{ __('Login') }}</button>
+                                <button type="submit" class="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top">{{ __('Register') }}</button>
                             </div>
                         </form>
                     </div>

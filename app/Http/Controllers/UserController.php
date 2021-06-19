@@ -34,17 +34,17 @@ class UserController extends Controller
     public function insert()
     {
         Request()->validate([
-            'name'   => 'required',
+            'nama'   => 'required',
             'email'   => 'required|unique:users,email',
             'foto'      => 'required|max:1024',
             'password'      => 'required|min:8',
         ], [
-            'name.required' => 'Wajib Diisi !!!',
-            'email.required' => 'Wajib Diisi !!!',
-            'email.unique' => 'Email Ini Sudah Terdaftar, Masukkan Email Lain !!!',
-            'foto.required' => 'Wajib Diisi !!!',
-            'password.required' => 'Wajib Diisi !!!',
-            'password.min' => 'Password Minimal 8 Karakter!!!',
+            'nama.required' => 'Wajib Diisi',
+            'email.required' => 'Wajib Diisi',
+            'email.unique' => 'Email Ini Sudah Terdaftar, Masukkan Email Lain',
+            'foto.required' => 'Wajib Diisi',
+            'password.required' => 'Wajib Diisi',
+            'password.min' => 'Password Minimal 8 Karakter',
         ]);
 
         $file = Request()->foto;
@@ -58,7 +58,7 @@ class UserController extends Controller
             'foto' => $filename,
         ];
         $this->UserModel->InsertData($data);
-        return redirect()->route('user')->with('pesan', 'Data Berhasil Di Simpan.!!!');
+        return redirect()->route('user')->with('pesan', 'Data Berhasil Di Simpan.');
     }
 
     public function edit($id)
@@ -77,10 +77,10 @@ class UserController extends Controller
             'email'   => 'required',
             'password'      => 'required|min:8',
         ], [
-            'name.required' => 'Wajib Diisi !!!',
-            'email.required' => 'Wajib Diisi !!!',
-            'password.required' => 'Wajib Diisi !!!',
-            'password.min' => 'Password Minimal 8 Karakter!!!',
+            'name.required' => 'Wajib Diisi',
+            'email.required' => 'Wajib Diisi',
+            'password.required' => 'Wajib Diisi',
+            'password.min' => 'Password Minimal 8 Karakter',
         ]);
 
         if (Request()->foto <> "") {
@@ -105,7 +105,7 @@ class UserController extends Controller
             ];
             $this->UserModel->UpdateData($id, $data);
         }
-        return redirect()->route('user')->with('pesan', 'Data Berhasil Di Update.!!!');
+        return redirect()->route('user')->with('pesan', 'Data Berhasil Di Update.');
     }
 
     public function delete($id)
@@ -117,6 +117,6 @@ class UserController extends Controller
         }
 
         $this->UserModel->DeleteData($id);
-        return redirect()->route('user')->with('pesan', 'Data Berhasil Di Delete.!!!');
+        return redirect()->route('user')->with('pesan', 'Data Berhasil Di Delete.');
     }
 }
