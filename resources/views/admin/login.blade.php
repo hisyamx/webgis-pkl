@@ -45,7 +45,7 @@
                             <div class="intro-x mt-2 text-gray-500 xl:hidden text-center">A few more clicks to sign in to your account.</div>
                             <div class="intro-x mt-8">
                                 <label for="email">{{ __('Alamat Email') }}</label>
-                                <input type="email" class="intro-x login__input form-control py-3 px-4 border-gray-300 block" id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                <input type="email" class="intro-x login__input form-control py-3 px-4 border-gray-300 block mt-2" id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -54,7 +54,7 @@
                             </div>
                             <div class="intro-x mt-8">
                                 <label for="password">{{ __('Password') }}</label>
-                                <input class="intro-x login__input form-control py-3 px-4 border-gray-300 block mt-4" id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                <input class="intro-x login__input form-control py-3 px-4 border-gray-300 block mt-2" id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

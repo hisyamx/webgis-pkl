@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.backend')
 
 @section('content')
 
@@ -8,8 +8,8 @@
         <h3 class="card-title">Add Data</h3>
         </div>
         <form action="/sekolah/insert" method="POST" enctype="multipart/form-data">
-            @csrf
-        <div class="card-body">
+            @csrf  
+        <div class="card-body">                        
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
@@ -99,7 +99,7 @@
 
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label>Foto Sekolah</label>
+                            <label>Foto Sekolah</label>                            
                                 <input type="file" name="foto" class="form-control" accept="image/jpeg,image/png">
                             <div class="text-danger">
                                 @error('foto')
@@ -125,11 +125,11 @@
                             </div>
                         </div>
                     </div>
-
-                </div>
-
-        </div>
-
+                    
+                </div>        
+           
+        </div>        
+    
     <div class="card-footer">
         <button type="submit" class="btn btn-info"><i class="fa fa-save"></i> Simpan</button>
         <button type="submit" class="btn btn-warning float-right">Cancel</button>
@@ -176,7 +176,7 @@
         "Grayscale": peta1,
         "Satellite": peta2,
         "Streets": peta3,
-        "Dark": peta4,
+        "Dark": peta4, 
     };
 
     L.control.layers(baseMaps).addTo(map);
