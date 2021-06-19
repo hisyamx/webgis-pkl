@@ -131,6 +131,13 @@
                     @endforeach
                 </ul>
             </li>
+            <li>
+                <a href="{{ route('tentang.user')}}" class="top-menu">
+                    <div class="top-menu__icon"> <i data-feather="info"></i> </div>
+                    <div class="top-menu__title">
+                        Tentang </div>
+                </a>
+            </li>
         </ul>
     </nav>
     <!-- END: Top Menu -->

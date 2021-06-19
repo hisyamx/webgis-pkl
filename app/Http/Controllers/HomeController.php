@@ -34,6 +34,6 @@ class HomeController extends Controller
             'hasil' => $this->Home->AllDataHasil(),
             'perkebunan' => $this->Home->DataPerkebunan(),
         ];
-        return view('admin.web', $data);
+        return view('admin.home', $data);
     }
 }

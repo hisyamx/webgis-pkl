@@ -6,8 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class Hasil extends Model
+class Tentang extends Model
 {
+    use HasFactory;
     // use HasFactory;
     public function AllData()
     {

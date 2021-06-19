@@ -11,32 +11,32 @@ class Wilayah extends Model
     // use HasFactory;
     public function AllData()
     {
-        return DB::table('wilayahs')
+        return DB::table('wilayah')
             ->get();
     }
 
     public function InsertData($data)
     {
-        DB::table('wilayahs')
+        DB::table('wilayah')
             ->insert($data);
     }
 
     public function DetailData($id_wilayah)
     {
-        return DB::table('wilayahs')
+        return DB::table('wilayah')
             ->where('id_wilayah', $id_wilayah)->first();
     }
 
     public function UpdateData($id_wilayah, $data)
     {
-        DB::table('wilayahs')
+        DB::table('wilayah')
             ->where('id_wilayah', $id_wilayah)
             ->update($data);
     }
 
     public function DeleteData($id_wilayah)
     {
-        DB::table('wilayahs')
+        DB::table('wilayah')
             ->where('id_wilayah', $id_wilayah)
             ->delete();
     }

@@ -11,6 +11,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WilayahController;
 use App\Http\Controllers\PerkebunanController;
 use App\Http\Controllers\HasilController;
+use App\Http\Controllers\TentangController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -93,6 +94,15 @@ Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit'
 Route::post('/user/update/{id}', [UserController::class, 'update'])->name('user.update');
 Route::get('/user/delete/{id}', [UserController::class, 'delete'])->name('user.delete');
 
+//tentang
+Route::get('/tentang', [TentangController::class, 'index'])->name('tentang.index');
+Route::get('/tentang/add', [TentangController::class, 'add'])->name('tentang.add');
+Route::post('/tentang/insert', [TentangController::class, 'insert']);
+Route::get('/tentang/edit/{id}', [TentangController::class, 'edit'])->name('tentang.edit');
+Route::post('/tentang/update/{id}', [TentangController::class, 'update'])->name('tentang.update');
+Route::get('/tentang/delete/{id}', [TentangController::class, 'delete'])->name('tentang.delete');
+
+Route::get('/tentanggis', [ViewController::class, 'tentanggis'])->name('tentang.user');
 
 //frontend
 Route::get('/wilayah/{id_wilayah}', [ViewController::class, 'wilayah']);

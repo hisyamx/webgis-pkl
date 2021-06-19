@@ -1,94 +1,99 @@
-@extends('layouts.backend')
-
+@extends('layouts.master')
+@section('title','Wilayah Dashboard')
 @section('content')
 
-<div class="col-md-12">
-<div class="card card-outline card-primary">
-    <div class="card-header">
-    <h3 class="card-title">Data {{ $title }}</h3>
-
-    <div class="card-tools">
-        <a href="/kecamatan/add" type="button" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> Add</a>
-    </div>
-    <!-- /.card-tools -->
-    </div>
-    <!-- /.card-header -->
-    <div class="card-body">
-        @if (session('pesan'))
-        <div class="alert alert-success alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <h5><i class="icon fas fa-check"></i> {{ session('pesan') }}</h5>            
+<!-- BEGIN: Content -->
+<div class="content">
+    <div class="grid grid-cols-12 gap-6">
+        <div class="col-span-12 xxl:col-span-9">
+            <div class="grid grid-cols-12 gap-6">
+                <!-- BEGIN: Weekly Top Products -->
+                <div class="col-span-12 mt-6">
+                    <div class="intro-y block sm:flex items-center h-10">
+                        <h2 class="text-lg font-medium truncate mr-5">
+                            Wilayah Kecamatan
+                        </h2>
+                        <div class="flex items-center sm:ml-auto mt-3 sm:mt-0">
+                            <button class="btn box flex items-center text-gray-700 dark:text-gray-300">
+                                <i data-feather="file-text" class="hidden sm:block w-4 h-4 mr-2">
+                                </i>Tambah Data Wilayah
+                            </button>
+                        </div>
+                    </div>
+                    <div class="intro-y overflow-auto lg:overflow-visible mt-8 sm:mt-0">
+                        <table class="table table-report sm:mt-2">
+                            <thead>
+                                <tr>
+                                    <th class="whitespace-nowrap">Wilayah Kecamatan</th>
+                                    <th class="text-center whitespace-nowrap">GeoJson</th>
+                                    <th class="text-center whitespace-nowrap">Luas</th>
+                                    <th class="text-center whitespace-nowrap">Warna</th>
+                                    <th class="text-center whitespace-nowrap">Aksi</th>
+                                </tr>
+                            </thead>
+                            <?php $no=1; ?>
+                            @foreach ($wilayah as $data)
+                            <tbody>
+                                <tr class="intro-x">
+                                    <td>
+                                        <a href="" class="font-medium whitespace-nowrap">{{ $data->wilayah }}</a>
+                                    </td>
+                                    <td class="text-center">{{ $data->geojson }}</td>
+                                    <td class="text-center">{{ $data->luas }}</td>
+                                    <td class="w-40" style="background-color: {{ $data->warna }}">
+                                        <div class="flex">
+                                            <div class="w-10 h-10 image-fit zoom-in">
+                                                <img alt="Warna" class="tooltip rounded-full"
+                                                    src="dist/images/preview-2.jpg">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="table-report__action w-56">
+                                        <div class="flex justify-center items-center">
+                                            <a class="flex items-center mr-3"
+                                                href="/wilayah/edit/{{ $data->id_wilayah }}"> <i
+                                                    data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
+                                            <button class="btn btn-sm btn-flat btn-danger" data-feather="trash-2" class="w-4 h-4 mr-1" data-toggle="modal"
+                                                data-target="#delete{{ $data->id_wilayah }}"><i
+                                                    class="fa fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            @endforeach
+                        </table>
+                    </div>
+                </div>
+                <!-- END: Weekly Top Products -->
+            </div>
         </div>
-        @endif
-        <table id="example1" class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th width="50px" class="text-center">No</th>
-                    <th>Kecamatan</th>
-                    <th width="50px">Warna</th>
-                    <th width="100px" class="text-center">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php $no=1; ?>
-                @foreach ($kecamatan as $data)
-                    <tr>
-                        <td class="text-center">{{ $no++ }}</td>
-                        <td>{{ $data->kecamatan }}</td>
-                        <td style="background-color: {{ $data->warna }}"></td>
-                        <td class="text-center">
-                            <a href="/kecamatan/edit/{{ $data->id_kecamatan }}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-edit"></i></a>
-                            <button class="btn btn-sm btn-flat btn-danger" data-toggle="modal" data-target="#delete{{ $data->id_kecamatan }}"><i class="fa fa-trash"></i></button>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
     </div>
-    <!-- /.card-body -->
 </div>
-<!-- /.card -->
-</div>
+<!-- END: Content -->
 
-@foreach ($kecamatan as $data)
-<div class="modal fade" id="delete{{ $data->id_kecamatan }}">
+@foreach ($wilayah as $data)
+<div class="modal fade" id="delete{{ $data->id_wilayah }}">
     <div class="modal-dialog">
-      <div class="modal-content bg-danger">
-        <div class="modal-header">
-          <h4 class="modal-title">{{ $data->kecamatan }}</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+        <div class="modal-content bg-danger">
+            <div class="modal-header">
+                <h4 class="modal-title">{{ $data->wilayah }}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Apakah Anda Ingin Hapus Data Ini?</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-outline-light" data-dismiss="modal">Batal</button>
+                <a href="/wilayah/delete/{{ $data->id_wilayah }}" type="button" class="btn btn-outline-light">Hapus</a>
+            </div>
         </div>
-        <div class="modal-body">
-          <p>Apakah Anda Ingin Hapus Data Ini..?</p>
-        </div>
-        <div class="modal-footer justify-content-between">
-          <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-          <a href="/kecamatan/delete/{{ $data->id_kecamatan }}" type="button" class="btn btn-outline-light">Yes</a>
-        </div>
-      </div>
-      <!-- /.modal-content -->
+        <!-- /.modal-content -->
     </div>
     <!-- /.modal-dialog -->
-  </div>
+</div>
 @endforeach
 
-<script>
-    $(function () {
-      $("#example1").DataTable({
-        "responsive": true,
-        "autoWidth": false,
-      });
-      $('#example2').DataTable({
-        "paging": true,
-        "lengthChange": false,
-        "searching": false,
-        "ordering": true,
-        "info": true,
-        "autoWidth": false,
-        "responsive": true,
-      });
-    });
-  </script>
 @endsection

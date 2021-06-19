@@ -1,71 +1,99 @@
 @extends('layouts.master')
-
+@section('title','User Dashboard')
 @section('content')
 
-<div class="col-md-12">
-    <div class="card card-outline card-primary">
-        <div class="card-header">
-            <h3 class="card-title">Data {{ $title }}</h3>
-
-            <div class="card-tools">
-                <a href="/hasil/add" type="button" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i>
-                    Tambah</a>
+<!-- BEGIN: Content -->
+<div class="content">
+    <div class="grid grid-cols-12 gap-6">
+        <div class="col-span-12 xxl:col-span-9">
+            <div class="grid grid-cols-12 gap-6">
+                <!-- BEGIN: Weekly Top Products -->
+                <div class="col-span-12 mt-6">
+                    <div class="intro-y block sm:flex items-center h-10">
+                        <h2 class="text-lg font-medium truncate mr-5">
+                            Hasil Perkebunan
+                        </h2>
+                        <div class="flex items-center sm:ml-auto mt-3 sm:mt-0">
+                            <button class="btn box flex items-center text-gray-700 dark:text-gray-300">
+                                <a data-feather="file-text" class="hidden sm:block w-4 h-4 mr-2">
+                                </a>Tambah Data Wilayah
+                            </button>
+                        </div>
+                    </div>
+                    <div class="intro-y overflow-auto lg:overflow-visible mt-8 sm:mt-0">
+                        <table class="table table-report sm:mt-2">
+                            <thead>
+                                <tr>
+                                    <th width="10px" class="text-center whitespace-nowrap">No</th>
+                                    <th class="text-center whitespace-nowrap">Hasil Kebun</th>
+                                    <th class="text-center whitespace-nowrap">Jenis Kebun</th>
+                                    <th class="text-center whitespace-nowrap">Status</th>
+                                    <th class="text-center whitespace-nowrap">Jumlah</th>
+                                    <th class="text-center whitespace-nowrap">Wilayah</th>
+                                    <th class="text-center whitespace-nowrap">Alamat</th>
+                                    <th class="text-center whitespace-nowrap">Tahun</th>
+                                    <th class="text-center whitespace-nowrap">Foto</th>
+                                    <th class="text-center whitespace-nowrap">Deskripsi</th>
+                                    <th class="text-center whitespace-nowrap">Action</th>
+                                </tr>
+                            </thead>
+                            <?php $no=1; ?>
+                            @foreach ($hasil as $data)
+                            <tbody>
+                                <tr class="intro-x">
+                                    <td class="text-center">{{ $no++ }}</td>
+                                    <td>
+                                        <a href="" class="font-medium whitespace-nowrap">{{ $data->hasil }}</a>
+                                    </td>
+                                    <td>
+                                        <a href="" class="font-medium whitespace-nowrap">{{ $data->perkebunan }}</a>
+                                    </td>
+                                    <td class="text-center">{{ $data->status }}</td>
+                                    <td class="text-center">{{ $data->jumlah }}</td>
+                                    <td>
+                                        <a href="" class="font-medium whitespace-nowrap">{{ $data->wilayah }}</a>
+                                    </td>
+                                    <td class="text-center">{{ $data->alamat }}</td>
+                                    <td class="text-center">{{ $data->tahun }}</td>
+                                    <td class="w-40" style="background-color: {{ $data->warna }}">
+                                        <div class="flex">
+                                            <div class="w-10 h-10 image-fit zoom-in">
+                                                <img alt="Warna" class="tooltip rounded-full"
+                                                src="dist/images/preview-2.jpg">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">{{ $data->deskripsi }}</td>
+                                    <td class="table-report__action w-56">
+                                        <div class="flex justify-center items-center">
+                                            <a class="flex items-center mr-3"
+                                                href="/hasil/edit/{{ $data->id_hasil }}"> <i
+                                                    data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
+                                            <button class="btn btn-sm btn-flat btn-danger" data-feather="trash-2"
+                                                class="w-4 h-4 mr-1" data-toggle="modal"
+                                                data-target="#delete{{ $data->id_hasil }}"><i class="fa fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            @endforeach
+                        </table>
+                    </div>
+                </div>
+                <!-- END: Weekly Top Products -->
             </div>
-            <!-- /.card-tools -->
         </div>
-        <!-- /.card-header -->
-        <div class="card-body">
-            @if (session('pesan'))
-            <div class="alert alert-success alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h5><i class="icon fas fa-check"></i> {{ session('pesan') }}</h5>
-            </div>
-            @endif
-            <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                    <tr>
-                        <th width="50px" class="text-center">No</th>
-                        <th class="text-center">Hasil Perkebunan</th>
-                        <th width="50px" class="text-center">Perkebunan</th>
-                        <th class="text-center">Status</th>
-                        <th class="text-center">Wilayah</th>
-                        <th class="text-center">Foto</th>
-                        <th width="100px" class="text-center">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php $no=1; ?>
-                    @foreach ($hasil as $data)
-                    <tr>
-                        <td class="text-center">{{ $no++ }}</td>
-                        <td>{{ $data->nama }}</td>
-                        <td>{{ $data->perkebunan }}</td>
-                        <td>{{ $data->status }}</td>
-                        <td>{{ $data->wilayah }}</td>
-                        <td class="text-center"><img src="{{ asset('foto') }}/{{ $data->foto }}" width="100px"
-                                height="75px"></td>
-                        <td class="text-center">
-                            <a href="/hasil/edit/{{ $data->id_hasil }}" class="btn btn-sm btn-flat btn-warning"><i
-                                    class="fa fa-edit"></i></a>
-                            <button class="btn btn-sm btn-flat btn-danger" data-toggle="modal"
-                                data-target="#delete{{ $data->id_hasil }}"><i class="fa fa-trash"></i></button>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-        <!-- /.card-body -->
     </div>
-    <!-- /.card -->
 </div>
+<!-- END: Content -->
 
 @foreach ($hasil as $data)
 <div class="modal fade" id="delete{{ $data->id_hasil }}">
     <div class="modal-dialog">
         <div class="modal-content bg-danger">
             <div class="modal-header">
-                <h4 class="modal-title">{{ $data->nama_hasil }}</h4>
+                <h4 class="modal-title">{{ $data->hasil }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -84,22 +112,4 @@
 </div>
 @endforeach
 
-<script>
-    $(function () {
-        $("#example1").DataTable({
-            "responsive": true,
-            "autoWidth": false,
-        });
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-        });
-    });
-
-</script>
 @endsection

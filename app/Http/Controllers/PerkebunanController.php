@@ -19,7 +19,7 @@ class PerkebunanController extends Controller
             'title' => 'Perkebunan',
             'perkebunan' => $this->Perkebunan->AllData(),
         ];
-        return view('admin.perkebunan.v_index', $data);
+        return view('admin.perkebunan.index', $data);
     }
 
     public function add()

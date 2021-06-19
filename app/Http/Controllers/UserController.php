@@ -20,7 +20,7 @@ class UserController extends Controller
             'title' => 'User',
             'user' => $this->UserModel->AllData(),
         ];
-        return view('admin.user.v_index', $data);
+        return view('admin.user.index', $data);
     }
 
     public function add()
@@ -28,7 +28,7 @@ class UserController extends Controller
         $data = [
             'title' => 'Add User',
         ];
-        return view('admin.user.v_add', $data);
+        return view('admin.user.add', $data);
     }
 
     public function insert()
@@ -52,7 +52,7 @@ class UserController extends Controller
         $file->move(public_path('foto'), $filename);
 
         $data = [
-            'name' => Request()->name,
+            'nama' => Request()->nama,
             'email' => Request()->email,
             'password' => Hash::make(Request()->password),
             'foto' => $filename,
@@ -67,17 +67,17 @@ class UserController extends Controller
             'title' => 'Edit User',
             'user'  => $this->UserModel->DetailData($id),
         ];
-        return view('admin.user.v_edit', $data);
+        return view('admin.user.edit', $data);
     }
 
     public function update($id)
     {
         Request()->validate([
-            'name'   => 'required',
+            'nama'   => 'required',
             'email'   => 'required',
             'password'      => 'required|min:8',
         ], [
-            'name.required' => 'Wajib Diisi',
+            'nama.required' => 'Wajib Diisi',
             'email.required' => 'Wajib Diisi',
             'password.required' => 'Wajib Diisi',
             'password.min' => 'Password Minimal 8 Karakter',
@@ -94,14 +94,14 @@ class UserController extends Controller
             $filename = $file->getClientOriginalName();
             $file->move(public_path('foto'), $filename);
             $data = [
-                'name' => Request()->name,
+                'nama' => Request()->nama,
                 'foto' => $filename,
             ];
             $this->UserModel->UpdateData($id, $data);
         } else {
             //jika tidak ganti icon
             $data = [
-                'name' => Request()->name,
+                'nama' => Request()->nama,
             ];
             $this->UserModel->UpdateData($id, $data);
         }
