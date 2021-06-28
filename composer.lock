@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ddeabc1ce42c24615f2fd0343a6ea0f2",
+    "content-hash": "ed3fa9e8819e2fec82a50e2147102092",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -117,6 +117,55 @@
                 }
             ],
             "time": "2021-01-20T22:51:39+00:00"
+        },
+        {
+            "name": "components/jquery",
+            "version": "3.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/components/jquery.git",
+                "reference": "b33e8f0f9a1cb2ae390cf05d766a900b53d2125b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/components/jquery/zipball/b33e8f0f9a1cb2ae390cf05d766a900b53d2125b",
+                "reference": "b33e8f0f9a1cb2ae390cf05d766a900b53d2125b",
+                "shasum": ""
+            },
+            "type": "component",
+            "extra": {
+                "component": {
+                    "scripts": [
+                        "jquery.js"
+                    ],
+                    "files": [
+                        "jquery.min.js",
+                        "jquery.min.map",
+                        "jquery.slim.js",
+                        "jquery.slim.min.js",
+                        "jquery.slim.min.map"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "JS Foundation and other contributors"
+                }
+            ],
+            "description": "jQuery JavaScript Library",
+            "homepage": "http://jquery.com",
+            "support": {
+                "forum": "http://forum.jquery.com",
+                "irc": "irc://irc.freenode.org/jquery",
+                "issues": "https://github.com/jquery/jquery/issues",
+                "source": "https://github.com/jquery/jquery",
+                "wiki": "http://docs.jquery.com/"
+            },
+            "time": "2020-05-05T13:21:02+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -891,6 +940,57 @@
                 "source": "https://github.com/guzzle/psr7/tree/1.7.0"
             },
             "time": "2020-09-30T07:37:11+00:00"
+        },
+        {
+            "name": "itsjavi/bootstrap-colorpicker",
+            "version": "3.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/itsjavi/bootstrap-colorpicker.git",
+                "reference": "c5961b5365ed0b2ad52541167434af481f6dc44a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/itsjavi/bootstrap-colorpicker/zipball/c5961b5365ed0b2ad52541167434af481f6dc44a",
+                "reference": "c5961b5365ed0b2ad52541167434af481f6dc44a",
+                "shasum": ""
+            },
+            "require": {
+                "components/jquery": ">=2.1.0",
+                "twbs/bootstrap": ">=4.0"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Javi Aguilar",
+                    "homepage": "https://itsjavi.com"
+                }
+            ],
+            "description": "Bootstrap Colorpicker is a modular color picker plugin for Bootstrap 4.",
+            "homepage": "https://itsjavi.com/bootstrap-colorpicker/",
+            "keywords": [
+                "bootstrap",
+                "colorpicker"
+            ],
+            "support": {
+                "issues": "https://github.com/itsjavi/bootstrap-colorpicker/issues",
+                "source": "https://github.com/itsjavi/bootstrap-colorpicker/tree/3.4.0"
+            },
+            "funding": [
+                {
+                    "url": "https://www.paypal.me/metaunicorn/10",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/itsjavi",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-06-04T08:51:38+00:00"
         },
         {
             "name": "laravel/framework",
@@ -4710,6 +4810,56 @@
                 "source": "https://github.com/tijsverkoyen/CssToInlineStyles/tree/2.2.3"
             },
             "time": "2020-07-13T06:12:54+00:00"
+        },
+        {
+            "name": "twbs/bootstrap",
+            "version": "v5.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twbs/bootstrap.git",
+                "reference": "688bce4fa695cc360a0d084e34f029b0c192b223"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/688bce4fa695cc360a0d084e34f029b0c192b223",
+                "reference": "688bce4fa695cc360a0d084e34f029b0c192b223",
+                "shasum": ""
+            },
+            "replace": {
+                "twitter/bootstrap": "self.version"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mark Otto",
+                    "email": "markdotto@gmail.com"
+                },
+                {
+                    "name": "Jacob Thornton",
+                    "email": "jacobthornton@gmail.com"
+                }
+            ],
+            "description": "The most popular front-end framework for developing responsive, mobile first projects on the web.",
+            "homepage": "https://getbootstrap.com/",
+            "keywords": [
+                "JS",
+                "css",
+                "framework",
+                "front-end",
+                "mobile-first",
+                "responsive",
+                "sass",
+                "web"
+            ],
+            "support": {
+                "issues": "https://github.com/twbs/bootstrap/issues",
+                "source": "https://github.com/twbs/bootstrap/tree/v5.0.2"
+            },
+            "time": "2021-06-22T18:29:16+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

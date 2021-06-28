@@ -328,9 +328,9 @@
     </div> -->
     <!-- END: Dark Mode Switcher-->
     <!-- BEGIN: JS Assets-->
-    <script
+    {{-- <script
         src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
-    </script>
+    </script> --}}
     <script src="{{ asset('dist')}}/js/app.js"></script>
     <!-- END: JS Assets-->
 </body>
