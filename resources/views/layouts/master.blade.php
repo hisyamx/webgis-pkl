@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="light">
+<html lang="en" class="light">
 <!-- BEGIN: Head -->
 
 <head>
@@ -32,6 +32,7 @@
         </div>
     </div>
     @include('layouts.footer')
+    @yield('page-js')
 </body>
 
 </html>

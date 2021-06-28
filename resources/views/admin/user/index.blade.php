@@ -15,8 +15,8 @@
                         </h2>
                         <div class="flex items-center sm:ml-auto mt-3 sm:mt-0">
                             <button class="btn box flex items-center text-gray-700 dark:text-gray-300">
-                                <a data-feather="file-text" class="hidden sm:block w-4 h-4 mr-2">
-                                </a>Tambah Data Wilayah
+                                <a href="{{ route('admin.profile.add') }}">Tambah Data
+                                    Admin</a>
                             </button>
                         </div>
                     </div>

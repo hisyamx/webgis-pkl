@@ -8,8 +8,8 @@
         <h3 class="card-title">Add Data</h3>
         </div>
         <form action="/kecamatan/insert" method="POST">
-            @csrf  
-        <div class="card-body">                        
+            @csrf
+        <div class="card-body">
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
@@ -29,7 +29,7 @@
                                 <input name="warna" class="form-control" placeholder="warna">
                                 <div class="input-group-append">
                                 <span class="input-group-text"><i class="fas fa-square"></i></span>
-                                </div>                                
+                                </div>
                             </div>
                             <div class="text-danger">
                                 @error('warna')
@@ -49,10 +49,10 @@
                             </div>
                         </div>
                     </div>
-                </div>        
-           
-        </div>        
-    
+                </div>
+
+        </div>
+
     <div class="card-footer">
         <button type="submit" class="btn btn-info"><i class="fa fa-save"></i> Simpan</button>
         <button type="submit" class="btn btn-warning float-right">Cancel</button>

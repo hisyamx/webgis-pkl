@@ -14,9 +14,13 @@
                             Wilayah Kecamatan
                         </h2>
                         <div class="flex items-center sm:ml-auto mt-3 sm:mt-0">
-                            <button class="btn box flex items-center text-gray-700 dark:text-gray-300">
+                            {{-- <button class="btn box flex items-center text-gray-700 dark:text-gray-300">
                                 <i data-feather="file-text" class="hidden sm:block w-4 h-4 mr-2">
                                 </i>Tambah Data Wilayah
+                            </button> --}}
+                            <button class="btn box flex items-center text-gray-700 dark:text-gray-300">
+                                <a href="{{ route('admin.wilayah.add') }}">Tambah Data
+                                    Wilayah</a>
                             </button>
                         </div>
                     </div>
@@ -53,9 +57,9 @@
                                             <a class="flex items-center mr-3"
                                                 href="/wilayah/edit/{{ $data->id_wilayah }}"> <i
                                                     data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                                            <button class="btn btn-sm btn-flat btn-danger" data-feather="trash-2" class="w-4 h-4 mr-1" data-toggle="modal"
-                                                data-target="#delete{{ $data->id_wilayah }}"><i
-                                                    class="fa fa-trash"></i>
+                                            <button class="btn btn-sm btn-flat btn-danger" data-feather="trash-2"
+                                                class="w-4 h-4 mr-1" data-toggle="modal"
+                                                data-target="#delete{{ $data->id_wilayah }}"><i class="fa fa-trash"></i>
                                             </button>
                                         </div>
                                     </td>

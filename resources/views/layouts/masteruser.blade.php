@@ -25,7 +25,7 @@
     <div class="mobile-menu md:hidden">
         <div class="mobile-menu-bar">
             <a href="" class="flex mr-auto">
-                <img alt="Icewall Tailwind HTML Admin Template" class="w-6" src="{{ asset('dist')}}/images/logo.svg">
+                <img alt="GIS Kabupaten Pekalongan" class="w-6" src="{{ asset('dist')}}/images/logo.svg">
             </a>
             <a href="javascript:;" id="mobile-menu-toggler"> <i data-feather="bar-chart-2"
                     class="w-8 h-8 text-white transform -rotate-90"></i> </a>
@@ -48,7 +48,7 @@
                 <ul class="">
                     @foreach ($wilayah as $data)
                     <li>
-                        <a href="/wilayah/{{ $data->id_wilayah }}" class="menu">
+                        <a href="{{ route('user.wilayah')}}/{{ $data->id_wilayah }}" class="menu">
                             <div class="menu__icon"> <i data-feather="activity"></i> </div>
                             <div class="menu__title"> {{ $data->wilayah }} </div>
                         </a>
@@ -65,13 +65,20 @@
                 <ul class="">
                     @foreach ($perkebunan as $data)
                     <li>
-                        <a href="/perkebunan/{{ $data->id_perkebunan }}" class="menu">
+                        <a href="{{ route('user.perkebunan')}}/{{ $data->id_perkebunan }}" class="menu">
                             <div class="menu__icon"> <i data-feather="activity"></i> </div>
                             <div class="menu__title"> {{ $data->perkebunan }} </div>
                         </a>
                     </li>
                     @endforeach
                 </ul>
+            </li>
+            <li>
+                <a href="{{ route('user.tentang')}}" class="menu">
+                    <div class="menu__icon"> <i data-feather="info"></i> </div>
+                    <div class="menu__title">
+                        Tentang </div>
+                </a>
             </li>
         </ul>
     </div>
@@ -106,7 +113,7 @@
                 <ul class="">
                     @foreach ($wilayah as $data)
                     <li>
-                        <a href="/wilayah/{{ $data->id_wilayah }}" class="top-menu">
+                        <a href="{{ route('user.wilayah')}}/{{ $data->id_wilayah }}" class="top-menu">
                             <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
                             <div class="top-menu__title">{{ $data->wilayah }}</div>
                         </a>
@@ -123,7 +130,7 @@
                 <ul class="">
                     @foreach ($perkebunan as $data)
                     <li>
-                        <a href="/perkebunan/{{ $data->id_perkebunan }}" class="top-menu">
+                        <a href="{{ route('user.wilayah')}}/{{ $data->id_perkebunan }}" class="top-menu">
                             <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
                             <div class="top-menu__title">{{ $data->perkebunan }}</div>
                         </a>
@@ -132,7 +139,7 @@
                 </ul>
             </li>
             <li>
-                <a href="{{ route('tentang.user')}}" class="top-menu">
+                <a href="{{ route('user.tentang')}}" class="top-menu">
                     <div class="top-menu__icon"> <i data-feather="info"></i> </div>
                     <div class="top-menu__title">
                         Tentang </div>
@@ -165,7 +172,7 @@
                                                     <div class="ml-auto">
                                                         <div class="text-3xl font-bold leading-8 mt-2">
                                                             {{ count($wilayah) }}</div>
-                                                        <div class="text-base text-gray-600 mt-1">Jumlah Wilayah</div>
+                                                        <div class="text-base text-gray-600 mt-1">Wilayah Kecamatan</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -179,7 +186,7 @@
                                                     <div class="ml-auto">
                                                         <div class="text-3xl font-bold leading-8 mt-2">
                                                             {{ count($perkebunan) }}</div>
-                                                        <div class="text-base text-gray-600 mt-1">Jenis Perkebunan</div>
+                                                        <div class="text-base text-gray-600 mt-1">Jenis-jenis Perkebunan</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -193,7 +200,7 @@
                                                     <div class="ml-auto">
                                                         <div class="text-3xl font-bold leading-8 mt-2">
                                                             {{ count($hasil) }}</div>
-                                                        <div class="text-base text-gray-600 mt-1">Hasil Perkebunan</div>
+                                                        <div class="text-base text-gray-600 mt-1">Hasil-hasil Perkebunan</div>
                                                     </div>
                                                 </div>
                                             </div>
