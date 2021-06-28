@@ -8,7 +8,7 @@
     <h3 class="card-title">Data {{ $title }}</h3>
 
     <div class="card-tools">
-        <a href="/kecamatan/add" type="button" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> Add</a>
+        <a href="{{route('admin.kecamatan.add')}}" type="button" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> Add</a>
     </div>
     <!-- /.card-tools -->
     </div>
@@ -17,7 +17,7 @@
         @if (session('pesan'))
         <div class="alert alert-success alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <h5><i class="icon fas fa-check"></i> {{ session('pesan') }}</h5>            
+            <h5><i class="icon fas fa-check"></i> {{ session('pesan') }}</h5>
         </div>
         @endif
         <table id="example1" class="table table-bordered table-striped">
@@ -92,3 +92,4 @@
     });
   </script>
 @endsection
+

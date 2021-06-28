@@ -19,7 +19,8 @@
                 </div>
                 <div id="input" class="p-5">
                     <div class="preview">
-                        <form action="{{ route('admin.wilayah.add') }}" method="POST" enctype="multipart/form-data">
+                        {{-- <form action="{{ route('admin.wilayah.add') }}" method="POST" enctype="multipart/form-data"> --}}
+                        <form action="admin/wilayah/insert" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div>
                                 <label for="nama" class="form-label">Nama</label>

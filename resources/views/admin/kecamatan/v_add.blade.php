@@ -7,7 +7,7 @@
         <div class="card-header">
             <h3 class="card-title">Add Data</h3>
         </div>
-        <form action="{{route('admin.kecamatan.insert')}}" method="POST">
+        <form action="{{route('admin.kecamatan.add')}}" method="POST">
             @csrf
             <div class="card-body">
                 <div class="row">

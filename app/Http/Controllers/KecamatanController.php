@@ -53,7 +53,7 @@ class KecamatanController extends Controller
             'geojson' => Request()->geojson,
         ];
         $this->KecamatanModel->InsertData($data);
-        return redirect()->route('kecamatan')->with('pesan', 'Data Berhasil Di Tambahkan');
+        return redirect()->route('admin.kecamatan.index')->with('pesan', 'Data Berhasil Di Tambahkan');
     }
 
     public function edit($id_kecamatan)
@@ -87,12 +87,12 @@ class KecamatanController extends Controller
             'geojson' => Request()->geojson,
         ];
         $this->KecamatanModel->UpdateData($id_kecamatan, $data);
-        return redirect()->route('kecamatan')->with('pesan', 'Data Berhasil Di Update.!!!');
+        return redirect()->route('admin.kecamatan.index')->with('pesan', 'Data Berhasil Di Update.!!!');
     }
 
     public function delete($id_kecamatan)
     {
         $this->KecamatanModel->DeleteData($id_kecamatan);
-        return redirect()->route('kecamatan')->with('pesan', 'Data Berhasil Di Delete.!!!');
+        return redirect()->route('admin.kecamatan.index')->with('pesan', 'Data Berhasil Di Delete.!!!');
     }
 }

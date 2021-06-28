@@ -44,10 +44,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     //Kecamatan
     Route::get('/kecamatan', [KecamatanController::class, 'index'])->name('admin.kecamatan.index');
     Route::get('/kecamatan/add', [KecamatanController::class, 'add'])->name('admin.kecamatan.add');
-    Route::post('/kecamatan/insert', [KecamatanController::class, 'insert']);
+    Route::post('/kecamatan', [KecamatanController::class, 'insert']);
     Route::get('/kecamatan/edit/{id_kecamatan}', [KecamatanController::class, 'edit'])->name('admin.kecamatan.edit');
     Route::post('/kecamatan/update/{id_kecamatan}', [KecamatanController::class, 'update'])->name('admin.kecamatan.update');
-    Route::delete('/kecamatan/delete/{id_kecamatan}', [KecamatanController::class, 'delete'])->name('admin.kecamatan.delete');
+    Route::get('/kecamatan/delete/{id_kecamatan}', [KecamatanController::class, 'delete'])->name('admin.kecamatan.delete');
 
     //jenjang
     Route::get('/jenjang', [JenjangController::class, 'index'])->name('admin.jenjang.index');
@@ -100,7 +100,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     //tentang
     Route::get('/tentang', [TentangController::class, 'index'])->name('admin.tentang.index');
     Route::get('/tentang/add', [TentangController::class, 'add'])->name('admin.tentang.add');
-    Route::post('/tentang/insert', [TentangController::class, 'insert'])->name('admin.tentang.insert');
+    Route::post('/tentang/insert', [TentangController::class, 'insert']);
     Route::get('/tentang/edit/{id}', [TentangController::class, 'edit'])->name('admin.tentang.edit');
     Route::post('/tentang/update/{id}', [TentangController::class, 'update'])->name('admin.tentang.update');
     Route::get('/tentang/delete/{id}', [TentangController::class, 'delete'])->name('admin.tentang.delete');
