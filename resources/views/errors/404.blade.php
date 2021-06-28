@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Webgis Kabupaten Pekalongan, Laravel 8, Leaflet, Mapbox.">
     <meta name="author" content="webgis">
-    <title>Admin @yield('title')</title>
+    <title>Admin Unknown Page</title>
     <!-- BEGIN: CSS Assets-->
     <link rel="stylesheet" href="{{ asset('dist')}}/css/app.css" />
     <!-- END: CSS Assets-->
@@ -26,8 +26,9 @@
                 <div class="intro-x text-8xl font-medium">404</div>
                 <div class="intro-x text-xl lg:text-3xl font-medium mt-5">Oops. Halaman Kosong.</div>
                 <div class="intro-x text-lg mt-3">URL yang dimaksud mungkin salah silakan kembali ke halaman sebelumnya.</div>
-                <button
-                    class="intro-x btn py-3 px-4 text-white border-white dark:border-dark-5 dark:text-gray-300 mt-10">Kembali ke Dashboard</button>
+                <button class="intro-x btn py-3 px-4 text-white border-white dark:border-dark-5 dark:text-gray-300 mt-10">
+                    <a href="{{ route('admin.dashboard.index') }}">Kembali ke Dashboard</a>
+                </button>
             </div>
         </div>
         <!-- END: Error Page -->

@@ -1,222 +1,99 @@
-@extends('layouts.backend')
-
+@extends('layouts.master')
+@section('title', 'Tambah Data Wilayah')
 @section('content')
-
-<div class="col-md-12">
-    <div class="card card-outline card-primary">
-        <div class="card-header">
-        <h3 class="card-title">Add Data</h3>
-        </div>
-        <form action="/sekolah/insert" method="POST" enctype="multipart/form-data">
-            @csrf  
-        <div class="card-body">                        
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Nama Sekolah</label>
-                            <input name="nama_sekolah" class="form-control" placeholder="Nama Sekolah">
-                            <div class="text-danger">
-                                @error('nama_sekolah')
-                                    {{ $message }}
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Jenjang</label>
-                            <select name="id_jenjang" class="form-control">
-                                <option value="">--Pilih Jenjang--</option>
-                                @foreach ($jenjang as $data)
-                                    <option value="{{ $data->id_jenjang }}">{{ $data->jenjang }}</option>
-                                @endforeach
-                            </select>
-                            <div class="text-danger">
-                                @error('id_jenjang')
-                                    {{ $message }}
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Status</label>
-                            <select name="status" class="form-control">
-                                <option value="">--Pilih Status--</option>
-                                <option value="Negeri">Negeri</option>
-                                <option value="Swasta">Swasta</option>
-                            </select>
-                            <div class="text-danger">
-                                @error('status')
-                                    {{ $message }}
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Kecamatan</label>
-                            <select name="id_kecamatan" class="form-control">
-                                <option value="">--Pilih Kecamatan--</option>
-                                @foreach ($kecamatan as $data)
-                                    <option value="{{ $data->id_kecamatan }}">{{ $data->kecamatan }}</option>
-                                @endforeach
-                            </select>
-                            <div class="text-danger">
-                                @error('status')
-                                    {{ $message }}
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <label>Alamat Sekolah</label>
-                            <input name="alamat" class="form-control" placeholder="Alamat Sekolah">
-                            <div class="text-danger">
-                                @error('alamat')
-                                    {{ $message }}
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Posisi Sekolah</label>
-                            <input name="posisi" id="posisi" class="form-control" placeholder="Posisi Sekolah" readonly>
-                            <div class="text-danger">
-                                @error('posisi')
-                                    {{ $message }}
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Foto Sekolah</label>                            
-                                <input type="file" name="foto" class="form-control" accept="image/jpeg,image/png">
-                            <div class="text-danger">
-                                @error('foto')
-                                    {{ $message }}
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12">
-                        <label>Map</label><label class="text-danger">(Drag and Drop Marker Atau Klik Map Untuk Menentukan Posisi Sekolah)</label>
-                        <div id="map" style="width: 100%; height: 300px;"></div>
-                    </div>
-
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <label>Deskripsi</label>
-                            <textarea name="deskripsi" class="form-control" placeholder="Deskripsi" rows="5"></textarea>
-                            <div class="text-danger">
-                                @error('deskripsi')
-                                    {{ $message }}
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>        
-           
-        </div>        
-    
-    <div class="card-footer">
-        <button type="submit" class="btn btn-info"><i class="fa fa-save"></i> Simpan</button>
-        <button type="submit" class="btn btn-warning float-right">Cancel</button>
+<!-- BEGIN: Content -->
+<div class="content">
+    <div class="intro-y flex items-center mt-5">
+        <h2 class="text-lg font-medium mr-auto">
+            Tambah Data Wilayah Kecamatan
+        </h2>
     </div>
-</form>
+    <div class="grid grid-cols-12 gap-6 mt-5">
+        <div class="intro-y col-span-12 lg:col-span-12">
+            <!-- BEGIN: Input -->
+            <div class="intro-y box">
+                <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200 dark:border-dark-5">
+                    <h2 class="font-medium text-base mr-auto">
+                        Tambahkan Data
+                    </h2>
+                </div>
+                <div id="input" class="p-5">
+                    <div class="preview">
+                        <form action="{{ route('admin.hasil.insert') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div>
+                                <label for="nama" class="form-label">Nama Hasil Perkebunan</label>
+                                <input name="nama" id="nama" type="text" class="form-control" placeholder="Nama Hasil Perkebunan"
+                                    value="{{ old('nama') }}">
+                            </div>
+                            <div class="mt-3">
+                                <label for="id_perkebunan" class="form-label">Perkebunan</label>
+                                <select name="id_perkebunan" class="form-control">
+                                <option value="">--Pilih perkebunan--</option>
+                                @foreach ($perkebunan as $data)
+                                    <option value="{{ $data->id_perkebunan }}">{{ $data->perkebunan }}</option>
+                                @endforeach
+                                </select>
+                            </div>
+                            <div class="mt-3">
+                                <label for="id_wilayah" class="form-label">Wilayah</label>
+                                <select name="id_wilayah" class="form-control">
+                                <option value="">--Pilih Wilayah--</option>
+                                @foreach ($wilayah as $data)
+                                    <option value="{{ $data->id_wilayah }}">{{ $data->wilayah }}</option>
+                                @endforeach
+                                </select>
+                            </div>
+                            <div class="mt-3">
+                                <label for="jumlah" class="form-label">Jumlah</label>
+                                <input name="jumlah" id="jumlah" type="text" class="form-control" placeholder="jumlah Kebun"
+                                    value="{{ old('jumlah') }}">
+                            </div>
+                            <div class="mt-3">
+                                <label for="posisi" class="form-label">Posisi</label>
+                                <input name="posisi" id="posisi" type="text" class="form-control" placeholder="posisi Kebun"
+                                    value="{{ old('posisi') }}">
+                            </div>
+                            <div class="mt-3">
+                                <label for="luas" class="form-label">Luas</label>
+                                <div class="grid-cols-3 gap-2">
+                                    <div class="input-group">
+                                        <div id="input-group-3" class="input-group-text">Hektar</div>
+                                        <input type="text" class="form-control" placeholder="Luas Kecamatan"
+                                            aria-describedby="input-group-12" value="{{ old('luas') }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <label for="warna" class="form-label">Warna</label>
+                                <input id="cp1" name="warna" class="form-control" placeholder="Warna" value="{{ old('warna') }}">
+                                {{-- <input id="cp1" type="text" class="form-control input-lg" value="{{ old('warna') }}"/> --}}
+                            </div>
+                            <div class="mt-3">
+                                <label for="geojson" class="form-label">GeoJson</label>
+                                <textarea name="geojson" id="geojson" rows="7" type="text" class="form-control" placeholder="GeoJson Kecamatan"
+                                    value="{{ old('geojson') }}"></textarea>
+                            </div>
+                            <div class="text-right mt-5">
+                                <button type="submit" class="btn btn-primary w-24">Tambah</button>
+                            </div>
+                        </form>
+                        <!-- END: Form Layout -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-</div>
-
-
-<script>
-    var peta1 = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-            '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-            'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        id: 'mapbox/streets-v11'
-    });
-
-    var peta2 = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-            '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-            'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        id: 'mapbox/satellite-v9'
-    });
-
-
-    var peta3 = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    });
-
-    var peta4 = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-            '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-            'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        id: 'mapbox/dark-v10'
-    });
-
-    var map = L.map('map', {
-        center: [-0.932910117571772, 100.39606514807615],
-        zoom: 14,
-        layers: [peta1],
-    });
-
-    var baseMaps = {
-        "Grayscale": peta1,
-        "Satellite": peta2,
-        "Streets": peta3,
-        "Dark": peta4, 
-    };
-
-    L.control.layers(baseMaps).addTo(map);
-
-    //mengambil titik koordinat
-    var curLocation = [-0.932910117571772, 100.39606514807615];
-    map.attributionControl.setPrefix(false);
-
-    var marker = new L.marker(curLocation,{
-        draggable : 'true',
-    });
-    map.addLayer(marker);
-
-    //ambil koordinat saat marker di drag n drop
-    marker.on('dragend',function(event){
-        var position = marker.getLatLng();
-        marker.setLatLng(position, {
-            draggable : 'true',
-        }).bindPopup(position).update();
-        //console.log(position.lat + "," + position.lng);
-        $("#posisi").val(position.lat + "," + position.lng).keyup();
-    });
-
-    //ambil koordinat saatmap diklik
-    var posisi = document.querySelector("[name=posisi]");
-    map.on("click",function(event){
-        var lat = event.latlng.lat;
-        var lng = event.latlng.lng;
-        if(!marker)
-        {
-            marker = L.marker(event.latlng).addTo(map);
-        }else{
-            marker.setLatLng(event.latlng);
-        }
-        posisi.value = lat + "," + lng;
-    });
-
-
-</script>
-
+<!-- END: Content -->
 @endsection
 
+@section('page-css')
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/css/bootstrap-select.min.css">
+@endsection
 
+@section('page-js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js">
+</script>
+@endsection

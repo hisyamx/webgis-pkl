@@ -22,7 +22,7 @@ class AdminMiddleware
             if ($user->role == 1) {
                 return $next($request);
             }
-            return redirect("https://www.youtube.com");
+            return redirect(route('404'));
         }
         return redirect(route('login'));
     }

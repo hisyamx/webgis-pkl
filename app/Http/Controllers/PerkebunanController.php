@@ -27,7 +27,7 @@ class PerkebunanController extends Controller
         $data = [
             'title' => 'Add Perkebunan',
         ];
-        return view('admin.perkebunan.tambah', $data);
+        return view('admin.perkebunan.add', $data);
     }
 
     public function insert()
@@ -52,7 +52,7 @@ class PerkebunanController extends Controller
             'ikon' => $filename,
         ];
         $this->Perkebunan->InsertData($data);
-        return redirect()->route('perkebunan')->with('pesan', 'Data Berhasil Di Simpan.');
+        return redirect()->route('admin.perkebunan.index')->with('pesan', 'Data Berhasil Di Simpan.');
     }
 
     public function edit($id_perkebunan)
@@ -98,7 +98,7 @@ class PerkebunanController extends Controller
             ];
             $this->Perkebunan->UpdateData($id_perkebunan, $data);
         }
-        return redirect()->route('perkebunan')->with('pesan', 'Data Berhasil Di Update.');
+        return redirect()->route('admin.perkebunan.index')->with('pesan', 'Data Berhasil Di Update.');
     }
 
     public function delete($id_perkebunan)
@@ -110,6 +110,6 @@ class PerkebunanController extends Controller
         }
 
         $this->Perkebunan->DeleteData($id_perkebunan);
-        return redirect()->route('perkebunan')->with('pesan', 'Data Berhasil Di Delete.');
+        return redirect()->route('admin.perkebunan.index')->with('pesan', 'Data Berhasil Di Delete.');
     }
 }

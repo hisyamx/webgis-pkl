@@ -55,7 +55,7 @@ class WilayahController extends Controller
             'warna' => Request()->warna,
         ];
         $this->Wilayah->InsertData($data);
-        return redirect()->route('wilayah')->with('pesan', 'Data Berhasil Di Tambahkan');
+        return redirect()->route('admin.wilayah.index')->with('pesan', 'Data Berhasil Di Tambahkan');
     }
 
     public function edit($id_wilayah)
@@ -92,12 +92,12 @@ class WilayahController extends Controller
             'warna' => Request()->warna,
         ];
         $this->Wilayah->UpdateData($id_wilayah, $data);
-        return redirect()->route('wilayah')->with('pesan', 'Data Berhasil Di Update.');
+        return redirect()->route('admin.wilayah.index')->with('pesan', 'Data Berhasil Di Update.');
     }
 
     public function delete($id_wilayah)
     {
         $this->Wilayah->DeleteData($id_wilayah);
-        return redirect()->route('wilayah')->with('pesan', 'Data Berhasil Di Delete.');
+        return redirect()->route('admin.wilayah.index')->with('pesan', 'Data Berhasil Di Delete.');
     }
 }

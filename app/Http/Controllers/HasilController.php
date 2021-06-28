@@ -34,7 +34,7 @@ class HasilController extends Controller
             'jenjang' => $this->Perkebunan->AllData(),
             'wilayah' => $this->Wilayah->AllData(),
         ];
-        return view('admin.hasil.tambah', $data);
+        return view('admin.hasil.add', $data);
     }
 
     public function insert()
@@ -87,7 +87,7 @@ class HasilController extends Controller
             'foto' => $filename,
         ];
         $this->Hasil->InsertData($data);
-        return redirect()->route('hasil')->with('pesan', 'Data Berhasil Di Tambahkan');
+        return redirect()->route('admin.hasil.index')->with('pesan', 'Data Berhasil Di Tambahkan');
     }
 
     public function edit($id_hasil)
@@ -174,7 +174,7 @@ class HasilController extends Controller
             ];
             $this->Hasil->UpdateData($id_hasil, $data);
         }
-        return redirect()->route('hasil')->with('pesan', 'Data Berhasil Di Update.');
+        return redirect()->route('admin.hasil.index')->with('pesan', 'Data Berhasil Di Update.');
     }
 
     public function delete($id_hasil)
@@ -185,6 +185,6 @@ class HasilController extends Controller
             unlink(public_path('foto') . '/' . $hasil->foto);
         }
         $this->Hasil->DeleteData($id_hasil);
-        return redirect()->route('hasil')->with('pesan', 'Data Berhasil Di Delete.');
+        return redirect()->route('admin.hasil.index')->with('pesan', 'Data Berhasil Di Delete.');
     }
 }
