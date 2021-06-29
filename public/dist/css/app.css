@@ -587,9 +587,9 @@ video {
 	padding-top: 1rem;
 	padding-bottom: 1rem;
 }
-.alert:not(.show){
+/* .alert:not(.show){
 	display: none;
-}
+} */
 .alert.alert-dismissible{
 	padding-left: 1.25rem;
 	padding-right: 4rem;

@@ -3,113 +3,123 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use App\Models\Hasil;
 use App\Models\Perkebunan;
+use App\Models\Wilayah;
+use App\Models\Tentang;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+
 
 class PerkebunanController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-        $this->Perkebunan = new Perkebunan();
-    }
-
     public function index()
     {
-        $data = [
-            'title' => 'Perkebunan',
-            'perkebunan' => $this->Perkebunan->AllData(),
-        ];
-        return view('admin.perkebunan.index', $data);
+        $perkebunan = Perkebunan::orderBy('nama')->get();
+
+        return view("admin.perkebunan.index", ['perkebunan' => $perkebunan]);
     }
 
-    public function add()
+    public function create()
     {
-        $data = [
-            'title' => 'Add Perkebunan',
-        ];
-        return view('admin.perkebunan.add', $data);
-    }
-
-    public function insert()
-    {
-        Request()->validate([
-            'nama'   => 'required',
-            'luas'   => 'required',
-            'ikon'      => 'required|max:1024',
-        ], [
-            'perkebunan.required' => 'Wajib Diisi',
-            'nama.required' => 'Wajib Diisi',
-            'ikon.required' => 'Wajib Diisi',
-        ]);
-
-        $file = Request()->ikon;
-        $filename = $file->getClientOriginalName();
-        $file->move(public_path('ikon'), $filename);
-
-        $data = [
-            'nama' => Request()->nama,
-            'luas' => Request()->luas,
-            'ikon' => $filename,
-        ];
-        $this->Perkebunan->InsertData($data);
-        return redirect()->route('admin.perkebunan.index')->with('pesan', 'Data Berhasil Di Simpan.');
+        $perkebunan = Perkebunan::all();
+        $users = User::where('role', '!=', 1)->get();
+        return view("admin.perkebunan.create", compact(['perkebunan', 'users']));
     }
 
     public function edit($id_perkebunan)
     {
-        $data = [
-            'title' => 'Edit perkebunan',
-            'perkebunan' => $this->Perkebunan->DetailData($id_perkebunan),
-        ];
-        return view('admin.perkebunan.edit', $data);
+        $perkebunan = Perkebunan::findOrFail($id_perkebunan);
+        return view("admin.perkebunan.edit", ['perkebunan' => $perkebunan]);
     }
 
-    public function update($id_perkebunan)
+    public function store(Request $request)
     {
-        Request()->validate([
-            'nama'   => 'required',
-            'luas'   => 'required',
-        ], [
-            'nama.required' => 'Wajib Diisi',
-            'luas.required' => 'Wajib Diisi',
+        $this->validate($request, [
+            'nama' => 'required',
+            'cover_image' => 'nullable'
         ]);
 
-        if (Request()->ikon <> "") {
-            //hapus ikon lama
-            $perkebunan = $this->Perkebunan->DetailData($id_perkebunan);
-            if ($perkebunan->ikon <> "") {
-                unlink(public_path('ikon') . '/' . $perkebunan->ikon);
-            }
-            //jika ingin ganti ikon
-            $file = Request()->ikon;
-            $filename = $file->getClientOriginalName();
-            $file->move(public_path('ikon'), $filename);
-            $data = [
-                'nama' => Request()->nama,
-                'luas' => Request()->luas,
-                'ikon' => $filename,
-            ];
-            $this->Perkebunan->UpdateData($id_perkebunan, $data);
+        // Handle File Upload
+        if ($request->hasFile('cover_image')) {
+            // Get filename with the extension
+            $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('cover_image')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+            // Upload Image
+
+            $path = $request->file('cover_image')->storeAs('public/cover_images', $fileNameToStore);
         } else {
-            //jika tidak ganti ikon
-            $data = [
-                'nama' => Request()->nama,
-                'luas' => Request()->luas,
-            ];
-            $this->Perkebunan->UpdateData($id_perkebunan, $data);
+            $fileNameToStore = 'noimage.jpg';
         }
-        return redirect()->route('admin.perkebunan.index')->with('pesan', 'Data Berhasil Di Update.');
+
+        $perkebunan = new Perkebunan();
+        $perkebunan->nama = $request->nama;
+        $perkebunan->cover_image = $fileNameToStore;
+
+        if ($perkebunan->save()) {
+            return redirect(route('admin.perkebunan.index'))->with('success', "perkebunan Created Successfully");
+        }
     }
 
-    public function delete($id_perkebunan)
+
+    public function show($id_perkebunan)
     {
-        //hapus ikon lama
-        $perkebunan = $this->Perkebunan->DetailData($id_perkebunan);
-        if ($perkebunan->ikon <> "") {
-            unlink(public_path('ikon') . '/' . $perkebunan->ikon);
+        $perkebunan = Perkebunan::findOrFail($id_perkebunan);
+        return view("admin.perkebunan.show", ['perkebunan' => $perkebunan]);
+    }
+
+    public function destroy($id_perkebunan)
+    {
+        $perkebunan = Perkebunan::findOrFail($id_perkebunan);
+        $perkebunan->delete();
+
+        if ($perkebunan->cover_image != 'noimage.jpg') {
+            // Delete Image
+            Storage::delete('public/cover_images/' . $perkebunan->cover_image);
         }
 
-        $this->Perkebunan->DeleteData($id_perkebunan);
-        return redirect()->route('admin.perkebunan.index')->with('pesan', 'Data Berhasil Di Delete.');
+        return redirect(route('admin.perkebunan.index'))->with("success", "perkebunan Deleted Successfully");
+    }
+
+    public function update_record(Request $request, $id_perkebunan)
+    {
+        $this->validate($request, [
+            'nama' => 'required',
+            'cover_image' => 'nullable'
+        ]);
+
+        $perkebunan = Perkebunan::findOrFail($id_perkebunan);
+
+        // Handle File Upload
+        if ($request->hasFile('cover_image')) {
+            // Get filename with the extension
+            $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('cover_image')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+            // Upload Image
+            $path = $request->file('cover_image')->storeAs('public/cover_images', $fileNameToStore);
+            // Delete file if exists
+            Storage::delete('public/cover_images/' . $perkebunan->cover_image);
+        }
+
+        $perkebunan->nama = $request->nama;
+
+        if ($request->hasFile('cover_image')) {
+            $perkebunan->cover_image = $fileNameToStore;
+        }
+
+        $perkebunan->save(); //this will UPDATE the record
+
+        return redirect(route('admin.perkebunan.index'))->with("success", "perkebunan was updated successfully");
     }
 }

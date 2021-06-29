@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateWilayahTable extends Migration
+class CreatePerkebunansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,10 @@ class CreateWilayahTable extends Migration
      */
     public function up()
     {
-        Schema::create('wilayah', function (Blueprint $table) {
-            $table->bigIncrements('id_wilayah');
+        Schema::create('perkebunans', function (Blueprint $table) {
+            $table->bigIncrements('id_perkebunan');
             $table->string('nama');
-            // $table->enum('role', [1, 2, 3]);
-
-            $table->string('geojson')->nullable();
-            $table->string('luas')->nullable();
-
-            $table->string('warna');
+            $table->string('cover_image')->nullable();
             $table->timestamps();
         });
     }
@@ -33,6 +28,6 @@ class CreateWilayahTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('wilayah');
+        Schema::dropIfExists('perkebunans');
     }
 }

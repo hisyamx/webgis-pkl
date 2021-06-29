@@ -48,7 +48,7 @@
                 <ul class="">
                     @foreach ($wilayah as $data)
                     <li>
-                        <a href="{{ route('user.wilayah')}}/{{ $data->id_wilayah }}" class="menu">
+                        <a href="{{ route('user.wilayah',$data->id_wilayah)}}" class="menu">
                             <div class="menu__icon"> <i data-feather="activity"></i> </div>
                             <div class="menu__title"> {{ $data->wilayah }} </div>
                         </a>
@@ -65,7 +65,7 @@
                 <ul class="">
                     @foreach ($perkebunan as $data)
                     <li>
-                        <a href="{{ route('user.perkebunan')}}/{{ $data->id_perkebunan }}" class="menu">
+                        <a href="{{ route('user.perkebunan',$data->id_perkebunan)}}" class="menu">
                             <div class="menu__icon"> <i data-feather="activity"></i> </div>
                             <div class="menu__title"> {{ $data->perkebunan }} </div>
                         </a>
@@ -113,9 +113,9 @@
                 <ul class="">
                     @foreach ($wilayah as $data)
                     <li>
-                        <a href="{{ route('user.wilayah')}}/{{ $data->id_wilayah }}" class="top-menu">
+                        <a href="{{ route('user.wilayah', $data->id_wilayah)}}" class="top-menu">
                             <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title">{{ $data->wilayah }}</div>
+                            <div class="top-menu__title">{{ $data->nama }}</div>
                         </a>
                     </li>
                     @endforeach
@@ -130,9 +130,9 @@
                 <ul class="">
                     @foreach ($perkebunan as $data)
                     <li>
-                        <a href="{{ route('user.wilayah')}}/{{ $data->id_perkebunan }}" class="top-menu">
+                        <a href="{{ route('user.wilayah',$data->id_perkebunan)}}" class="top-menu">
                             <div class="top-menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="top-menu__title">{{ $data->perkebunan }}</div>
+                            <div class="top-menu__title">{{ $data->nama }}</div>
                         </a>
                     </li>
                     @endforeach

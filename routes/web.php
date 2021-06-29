@@ -41,67 +41,68 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('/home', [HomeController::class, 'index'])->name('admin.home.index');
     Route::get('/dashboard', [HomeController::class, 'index'])->name('admin.dashboard.index');
 
-    //Kecamatan
-    Route::get('/kecamatan', [KecamatanController::class, 'index'])->name('admin.kecamatan.index');
-    Route::get('/kecamatan/add', [KecamatanController::class, 'add'])->name('admin.kecamatan.add');
-    Route::post('/kecamatan', [KecamatanController::class, 'insert']);
-    Route::get('/kecamatan/edit/{id_kecamatan}', [KecamatanController::class, 'edit'])->name('admin.kecamatan.edit');
-    Route::post('/kecamatan/update/{id_kecamatan}', [KecamatanController::class, 'update'])->name('admin.kecamatan.update');
-    Route::get('/kecamatan/delete/{id_kecamatan}', [KecamatanController::class, 'delete'])->name('admin.kecamatan.delete');
+    // ------------------------- Kelola Wilayah -------------------------
+    // > Wilayah
+    //Get Requests
+    Route::get("/wilayah", [WilayahController::class, 'index'])->name('admin.wilayah.index');
+    Route::get("/wilayah/create", [WilayahController::class, 'create'])->name('admin.wilayah.create');
+    Route::get("/wilayah/edit/{id_wilayah}", [WilayahController::class, 'edit'])->name('admin.wilayah.edit');
+    Route::get("/wilayah/show/{id_wilayah}", [WilayahController::class, 'show'])->name('admin.wilayah.show');
+    //Post Requests
+    Route::post("/wilayah/store", [WilayahController::class, 'store'])->name('admin.wilayah.store');
+    Route::post("/wilayah/edit/{id_wilayah}", [WilayahController::class, 'update_record'])->name('admin.wilayah.edit');
+    // Delete Request
+    Route::delete("/wilayah/delete/{id_wilayah}", [WilayahController::class, 'destroy'])->name('admin.wilayah.delete');
 
-    //jenjang
-    Route::get('/jenjang', [JenjangController::class, 'index'])->name('admin.jenjang.index');
-    Route::get('/jenjang/add', [JenjangController::class, 'add'])->name('admin.jenjang.add');
-    Route::post('/jenjang/insert', [JenjangController::class, 'insert'])->name('admin.jenjang.insert');
-    Route::get('/jenjang/edit/{id_jenjang}', [JenjangController::class, 'edit'])->name('admin.jenjang.edit');
-    Route::post('/jenjang/update/{id_jenjang}', [JenjangController::class, 'update'])->name('admin.jenjang.update');
-    Route::get('/jenjang/delete/{id_jenjang}', [JenjangController::class, 'delete'])->name('admin.jenjang.delete');
+    // ------------------------- Kelola Perkebunan -------------------------
+    // > Perkebunan
+    //Get Requests
+    Route::get("/perkebunan", [PerkebunanController::class, 'index'])->name('admin.perkebunan.index');
+    Route::get("/perkebunan/create", [PerkebunanController::class, 'create'])->name('admin.perkebunan.create');
+    Route::get("/perkebunan/edit/{id_perkebunan}", [PerkebunanController::class, 'edit'])->name('admin.perkebunan.edit');
+    Route::get("/perkebunan/show/{id_perkebunan}", [PerkebunanController::class, 'show'])->name('admin.perkebunan.show');
+    //Post Requests
+    Route::post("/perkebunan/store", [PerkebunanController::class, 'store'])->name('admin.perkebunan.store');
+    Route::post("/perkebunan/edit/{id_perkebunan}", [PerkebunanController::class, 'update_record'])->name('admin.perkebunan.edit');
+    // Delete Request
+    Route::delete("/perkebunan/delete/{id_perkebunan}", [PerkebunanController::class, 'destroy'])->name('admin.perkebunan.delete');
 
-    //sekolah
-    Route::get('/sekolah', [SekolahController::class, 'index'])->name('admin.sekolah.index');
-    Route::get('/sekolah/add', [SekolahController::class, 'add'])->name('admin.sekolah.add');
-    Route::post('/sekolah/insert', [SekolahController::class, 'insert'])->name('admin.sekolah.insert');
-    Route::get('/sekolah/edit/{id_sekolah}', [SekolahController::class, 'edit'])->name('admin.sekolah.edit');
-    Route::post('/sekolah/update/{id_sekolah}', [SekolahController::class, 'update'])->name('admin.sekolah.update');
-    Route::get('/sekolah/delete/{id_sekolah}', [SekolahController::class, 'delete'])->name('admin.sekolah.delete');
+    // ------------------------- Kelola Hasil -------------------------
+    // > Hasil
+    //Get Requests
+    Route::get("/hasil", [HasilController::class, 'index'])->name('admin.hasil.index');
+    Route::get("/hasil/create", [HasilController::class, 'create'])->name('admin.hasil.create');
+    Route::get("/hasil/edit/{id_hasil}", [HasilController::class, 'edit'])->name('admin.hasil.edit');
+    Route::get("/hasil/show/{id_hasil}", [HasilController::class, 'show'])->name('admin.hasil.show');
+    //Post Requests
+    Route::post("/hasil/store", [HasilController::class, 'store'])->name('admin.hasil.store');
+    Route::post("/hasil/edit/{id_hasil}", [HasilController::class, 'update_record'])->name('admin.hasil.edit');
+    // Delete Request
+    Route::delete("/hasil/delete/{id_hasil}", [HasilController::class, 'destroy'])->name('admin.hasil.delete');
 
-    //wilayah
-    Route::get('/wilayah', [WilayahController::class, 'index'])->name('admin.wilayah.index');
-    Route::get('/wilayah/add', [WilayahController::class, 'add'])->name('admin.wilayah.add');
-    Route::post('/wilayah/insert', [WilayahController::class, 'insert']);
-    Route::get('/wilayah/edit/{id_wilayah}', [WilayahController::class, 'edit'])->name('admin.wilayah.edit');
-    Route::post('/wilayah/update/{id_wilayah}', [WilayahController::class, 'update'])->name('admin.wilayah.update');
-    Route::get('/wilayah/delete/{id_wilayah}', [WilayahController::class, 'delete'])->name('admin.wilayah.delete');
+    // ------------------------- Kelola Admin -------------------------
+    // > Admin
+    //Get Requests
+    Route::get("/profile", [UserController::class, 'index'])->name('admin.profile.index');
+    Route::get("/profile/create", [UserController::class, 'create'])->name('admin.profile.create');
+    Route::get("/profile/edit/{id}", [UserController::class, 'edit'])->name('admin.profile.edit');
+    Route::get("/profile/show/{id}", [UserController::class, 'show'])->name('admin.profile.show');
+    //Post Requests
+    Route::post("/profile/store", [UserController::class, 'store'])->name('admin.profile.store');
+    Route::post("/profile/edit/{id}", [UserController::class, 'update_record'])->name('admin.profile.edit');
+    // Delete Request
+    Route::delete("/profile/delete/{id}", [UserController::class, 'destroy'])->name('admin.profile.delete');
 
-    //perkebunan
-    Route::get('/perkebunan', [PerkebunanController::class, 'index'])->name('admin.perkebunan.index');
-    Route::get('/perkebunan/add', [PerkebunanController::class, 'add'])->name('admin.perkebunan.add');
-    Route::post('/perkebunan/insert', [PerkebunanController::class, 'insert']);
-    Route::get('/perkebunan/edit/{id_perkebunan}', [PerkebunanController::class, 'edit'])->name('admin.perkebunan.edit');
-    Route::post('/perkebunan/update/{id_perkebunan}', [PerkebunanController::class, 'update'])->name('admin.perkebunan.update');
-    Route::get('/perkebunan/delete/{id_perkebunan}', [PerkebunanController::class, 'delete'])->name('admin.perkebunan.delete');
-
-    //hasil
-    Route::get('/hasil', [HasilController::class, 'index'])->name('admin.hasil.index');
-    Route::get('/hasil/add', [HasilController::class, 'add'])->name('admin.hasil.add');
-    Route::post('/hasil/insert', [HasilController::class, 'insert']);
-    Route::get('/hasil/edit/{id_hasil}', [HasilController::class, 'edit'])->name('admin.hasil.edit');
-    Route::post('/hasil/update/{id_hasil}', [HasilController::class, 'update'])->name('admin.hasil.update');
-    Route::get('/hasil/delete/{id_hasil}', [HasilController::class, 'delete'])->name('admin.hasil.delete');
-
-    //user
-    Route::get('/profile', [UserController::class, 'index'])->name('admin.profile.index');
-    Route::get('/profile/add', [UserController::class, 'add'])->name('admin.profile.add');
-    Route::post('/profile/insert', [UserController::class, 'insert']);
-    Route::get('/profile/edit/{id}', [UserController::class, 'edit'])->name('admin.profile.edit');
-    Route::post('/profile/update/{id}', [UserController::class, 'update'])->name('admin.profile.update');
-    Route::get('/profile/delete/{id}', [UserController::class, 'delete'])->name('admin.profile.delete');
-
-    //tentang
-    Route::get('/tentang', [TentangController::class, 'index'])->name('admin.tentang.index');
-    Route::get('/tentang/add', [TentangController::class, 'add'])->name('admin.tentang.add');
-    Route::post('/tentang/insert', [TentangController::class, 'insert']);
-    Route::get('/tentang/edit/{id}', [TentangController::class, 'edit'])->name('admin.tentang.edit');
-    Route::post('/tentang/update/{id}', [TentangController::class, 'update'])->name('admin.tentang.update');
-    Route::get('/tentang/delete/{id}', [TentangController::class, 'delete'])->name('admin.tentang.delete');
+    // ------------------------- Kelola Tentang -------------------------
+    // > Tentang
+    //Get Requests
+    Route::get("/tentang", [TentangController::class, 'index'])->name('admin.tentang.index');
+    Route::get("/tentang/create", [TentangController::class, 'create'])->name('admin.tentang.create');
+    Route::get("/tentang/edit/{id}", [TentangController::class, 'edit'])->name('admin.tentang.edit');
+    Route::get("/tentang/show/{id}", [TentangController::class, 'show'])->name('admin.tentang.show');
+    //Post Requests
+    Route::post("/tentang/store", [TentangController::class, 'store'])->name('admin.tentang.store');
+    Route::post("/tentang/edit/{id}", [TentangController::class, 'update_record'])->name('admin.tentang.edit');
+    // Delete Request
+    Route::delete("/tentang/delete/{id}", [TentangController::class, 'destroy'])->name('admin.tentang.delete');
 });

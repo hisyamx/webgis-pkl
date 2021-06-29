@@ -19,8 +19,8 @@
                 </div>
                 <div id="input" class="p-5">
                     <div class="preview">
-                        {{-- <form action="{{ route('admin.wilayah.add') }}" method="POST" enctype="multipart/form-data"> --}}
-                        <form action="admin/wilayah/insert" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.wilayah.store') }}" method="POST">
+                        {{-- <form action="admin/wilayah/insert" method="POST" enctype="multipart/form-data"> --}}
                             @csrf
                             <div>
                                 <label for="nama" class="form-label">Nama</label>
@@ -33,7 +33,7 @@
                                     <div class="input-group">
                                         <div id="input-group-3" class="input-group-text">Hektar</div>
                                         <input type="text" class="form-control" placeholder="Luas Kecamatan"
-                                            aria-describedby="input-group-12" value="{{ old('luas') }}">
+                                            aria-describedby="input-group-12" name="luas" value="{{ old('luas') }}">
                                     </div>
                                 </div>
                             </div>
@@ -56,11 +56,11 @@
                             <div class="mt-3">
                                 <label for="geojson" class="form-label">GeoJson</label>
                                 <textarea name="geojson" id="geojson" rows="7" type="text" class="form-control"
-                                    placeholder="GeoJson Kecamatan" value="{{ old('geojson') }}"></textarea>
+                                    placeholder="GeoJson Kecamatan">{{ old('geojson') }}</textarea>
                             </div>
-                            <div class="text-right mt-5">
-                                <button type="submit" class="btn btn-primary w-24">Tambah</button>
-                            </div>
+                            {{-- <div class="text-right mt-5"> --}}
+                                <button type="submit" class="btn btn-primary w-24 mt-5">Tambah</button>
+                            {{-- </div> --}}
                         </form>
                         <!-- END: Form Layout -->
                     </div>

@@ -3,37 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Models\Home;
+use Illuminate\Support\Facades\Storage;
+use App\Models\Hasil;
+use App\Models\Perkebunan;
+use App\Models\Wilayah;
+use App\Models\Tentang;
+use App\Models\User;
 
 class HomeController extends Controller
 {
-
-    public function __construct()
-    {
-        // $this->middleware('auth');
-        $this->Home = new Home();
-    }
-    // public function index()
-    // {
-    //     $data = [
-    //         'title' => 'Dashboard',
-    //         'kecamatan' => DB::table('tbl_kecamatan')->count(),
-    //         'jenjang' => DB::table('tbl_jenjang')->count(),
-    //         'sekolah' => DB::table('tbl_sekolah')->count(),
-    //         'user' => DB::table('users')->count(),
-    //     ];
-    //     return view('v_home', $data);
-    // }
-
     public function index()
     {
-        $data = [
-            'title' => 'Wilayah',
-            'wilayah' => $this->Home->DataWilayah(),
-            'hasil' => $this->Home->AllDataHasil(),
-            'perkebunan' => $this->Home->DataPerkebunan(),
-        ];
-        return view('admin.home', $data);
+        $wilayah_count = Wilayah::all()->count();
+        $wilayah = Wilayah::all();
+        $perkebunan_count = Perkebunan::all()->count();
+        $perkebunan = Perkebunan::all();
+        $hasil_count = Hasil::all()->count();
+        $hasil = Hasil::all();
+
+        return view('admin.home', compact(['wilayah', 'wilayah_count', 'perkebunan', 'perkebunan_count', 'hasil', 'hasil_count']));
     }
 }

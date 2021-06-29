@@ -10,7 +10,7 @@
                 <div class="col-span-12 mt-4">
                     <div class="intro-y flex items-center h-10">
                         <h2 class="text-lg font-medium truncate mr-5">
-                            Laporan Umum
+                            Admin Dashboard GIS
                         </h2>
                     </div>
                     <div class="grid grid-cols-12 gap-6 mt-2">
@@ -154,7 +154,7 @@
 
     var overlayer = {
         @foreach ($wilayah as $data)
-        "{{ $data->wilayah }}" : data{{ $data->id_wilayah }},
+        "{{ $data->nama }}" : data{{ $data->id_wilayah }},
         @endforeach
         "Wilayah" : wilayah,
     };
@@ -177,7 +177,7 @@
         ikonSize:     [60, 60],
     });
 
-    var informasi = '<table class="table table-bordered"><tr><td colspan="2"><img src="{{  asset('foto') }}/{{ $data->foto }}" width="250px"></td></tr><tbody><tr><td>Nama wilayah</td><td>: {{ $data->nama_wilayah }}</td></tr><tr><td>Jenjang</td><td>: {{ $data->jenjang }}</td></tr><tr><td>Status</td><td>: {{ $data->status }}</td></tr><tr><td colspan="2" class="text-center"><a href="/detailwilayah/{{ $data->id_wilayah }}" class="btn btn-sm btn-default">Detail</a></td></tr></tbody></table>';
+    var informasi = '<table class="table table-bordered"><tr><td colspan="2"><img src="{{  asset('foto') }}/{{ $data->foto }}" width="250px"></td></tr><tbody><tr><td>Nama wilayah</td><td>: {{ $data->nama }}</td></tr><tr><td>Perkebunan</td><td>: {{ $data->perkebunan }}</td></tr><tr><td>Status</td><td>: {{ $data->jenis }}</td></tr><tr><td colspan="2" class="text-center"><a href="/detailwilayah/{{ $data->id_wilayah }}" class="btn btn-sm btn-default">Detail</a></td></tr></tbody></table>';
 
     L.marker([<?= $data->posisi ?>],{ikon: ikonwilayah})
     .addTo(wilayah)

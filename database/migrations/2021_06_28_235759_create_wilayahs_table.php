@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTentangTable extends Migration
+class CreateWilayahsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,14 @@ class CreateTentangTable extends Migration
      */
     public function up()
     {
-        Schema::create('tentang', function (Blueprint $table) {
-            $table->id();
-            $table->string('foto')->nullable();
-            $table->string('deskripsi');
+        Schema::create('wilayahs', function (Blueprint $table) {
+            $table->bigIncrements('id_wilayah');
+            $table->string('nama');
+
+            $table->longText('geojson')->nullable();
+            $table->string('luas')->nullable();
+
+            $table->string('warna');
             $table->timestamps();
         });
     }
@@ -28,6 +32,6 @@ class CreateTentangTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tentang');
+        Schema::dropIfExists('wilayahs');
     }
 }

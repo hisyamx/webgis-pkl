@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePerkebunanTable extends Migration
+class CreateTentangsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,8 @@ class CreatePerkebunanTable extends Migration
      */
     public function up()
     {
-        Schema::create('perkebunan', function (Blueprint $table) {
-            $table->bigIncrements('id_perkebunan');
-            $table->string('nama');
-            $table->string('luas');
-
-            $table->string('ikon')->nullable();
-
+        Schema::create('tentangs', function (Blueprint $table) {
+            $table->id();
             $table->timestamps();
         });
     }
@@ -31,6 +26,6 @@ class CreatePerkebunanTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('perkebunan');
+        Schema::dropIfExists('tentangs');
     }
 }

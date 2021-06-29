@@ -3,188 +3,160 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Hasil;
-use App\Models\wilayah;
 use App\Models\Perkebunan;
+use App\Models\Wilayah;
+use App\Models\Tentang;
+use App\Models\User;
 
 
 class HasilController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-        $this->Hasil = new Hasil();
-        $this->Perkebunan = new Perkebunan();
-        $this->Wilayah = new Wilayah();
-    }
-
     public function index()
     {
-        $data = [
-            'title' => 'Hasil',
-            'hasil' => $this->Hasil->AllData(),
-        ];
-        return view('admin.hasil.index', $data);
+        $wilayah = Wilayah::orderBy('nama')->get();
+        $hasil = User::hasil()->orderBy('nama')->get();
+
+        return view("admin.hasil.index", ['hasil' => $hasil, 'wilayah' => $wilayah]);
     }
 
-    public function add()
+    public function create()
     {
-        $data = [
-            'title' => 'Add hasil',
-            'jenjang' => $this->Perkebunan->AllData(),
-            'wilayah' => $this->Wilayah->AllData(),
-        ];
-        return view('admin.hasil.add', $data);
+        $wilayah = Wilayah::all();
+        $users = User::where('role', '!=', 1)->get();
+        if (count($wilayah) <  1) {
+            return redirect("wilayah.index")->with("error", "You must create a wilayah before creating an hasil");
+        }
+        return view("admin.hasil.create", compact(['wilayah', 'users']));
     }
 
-    public function insert()
+    public function edit($id)
     {
-        Request()->validate(
-            [
-                'nama' => 'required',
-                'id_hasil' => 'required',
-                'id_perkebunan' => 'required',
-                'id_wilayah' => 'required',
-                'jenis' => 'required',
-                'jumlah' => 'required',
-                'alamat' => 'required',
-                'posisi' => 'required',
-                'tahun' => 'required',
-                'deskripsi' => 'required',
-                'foto' => 'required|max:1024',
-            ],
-            [
-                'nama.required' => 'Wajib diisi',
-                'id_hasil.required' => 'Wajib diisi',
-                'id_perkebunan.required' => 'Wajib diisi',
-                'id_wilayah.required' => 'Wajib diisi',
-                'jenis.required' => 'Wajib diisi',
-                'jumlah.required' => 'Wajib diisi',
-                'alamat.required' => 'Wajib diisi',
-                'posisi.required' => 'Wajib diisi',
-                'tahun.required' => 'Wajib diisi',
-                'deskripsi.required' => 'Wajib diisi',
-                'foto.required' => 'Wajib diisi',
-                'foto.max' => 'Foto Max 1024 KB',
-            ]
-        );
-        //jika validasinya tidak ada maka lakukan simpan data ke database
-        $file = Request()->foto;
-        $filename = $file->getClientOriginalName();
-        $file->move(public_path('foto'), $filename);
-
-        $data = [
-            'nama' => Request()->nama,
-            'id_hasil' => Request()->id_hasil,
-            'id_perkebunan' => Request()->id_perkebunan,
-            'id_wilayah' => Request()->id_wilayah,
-            'jenis' => Request()->jenis,
-            'jumlah' => Request()->jumlah,
-            'alamat' => Request()->alamat,
-            'posisi' => Request()->posisi,
-            'tahun' => Request()->tahun,
-            'deskripsi' => Request()->deskripsi,
-            'foto' => $filename,
-        ];
-        $this->Hasil->InsertData($data);
-        return redirect()->route('admin.hasil.index')->with('pesan', 'Data Berhasil Di Tambahkan');
+        $hasil = User::findOrFail($id);
+        $wilayah = Wilayah::all();
+        return view("admin.hasil.edit", ['hasil' => $hasil], ['wilayah' => $wilayah]);
     }
 
-    public function edit($id_hasil)
+    public function store(Request $request)
     {
-        $data = [
-            'title' => 'Edit hasil',
-            'hasil'   => $this->Hasil->DetailData($id_hasil),
-            'perkebunan' => $this->Perkebunan->AllData(),
-            'wilayah' => $this->Wilayah->AllData(),
-        ];
-        return view('admin.hasil.edit', $data);
-    }
+        $this->validate($request, [
+            'id_perkebunan' => 'required',
+            'nama' => 'required',
+            'jenis' => 'required',
+            'jumlah' => 'required',
+            'role' => 'required',
+            'telephone' => 'required',
+            'address' => 'required',
+            'wilayah' => 'required',
+            'start' => 'required',
+            'finish' => 'nullable',
+            'cover_image' => 'nullable',
+        ]);
 
-    public function update($id_hasil)
-    {
-        Request()->validate(
-            [
-                'nama' => 'required',
-                'id_hasil' => 'required',
-                'id_perkebunan' => 'required',
-                'id_wilayah' => 'required',
-                'jenis' => 'required',
-                'jumlah' => 'required',
-                'alamat' => 'required',
-                'posisi' => 'required',
-                'tahun' => 'required',
-                'deskripsi' => 'required',
-                'foto' => 'required|max:1024',
-            ],
-            [
-                'nama.required' => 'Wajib diisi',
-                'id_hasil.required' => 'Wajib diisi',
-                'id_perkebunan.required' => 'Wajib diisi',
-                'id_wilayah.required' => 'Wajib diisi',
-                'jenis.required' => 'Wajib diisi',
-                'jumlah.required' => 'Wajib diisi',
-                'alamat.required' => 'Wajib diisi',
-                'posisi.required' => 'Wajib diisi',
-                'tahun.required' => 'Wajib diisi',
-                'deskripsi.required' => 'Wajib diisi',
-                'foto.required' => 'Wajib diisi',
-                'foto.max' => 'Foto Max 1024 KB',
-            ]
-        );
+        // Handle File Upload
+        if ($request->hasFile('cover_image')) {
+            // Get filename with the extension
+            $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('cover_image')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+            // Upload Image
 
-        if (Request()->foto <> "") {
-            //hapus foto lama
-            $hasil = $this->Hasil->DetailData($id_hasil);
-            if ($hasil->foto <> "") {
-                unlink(public_path('foto') . '/' . $hasil->foto);
-            }
-            //jika ingin ganti icon
-            $file = Request()->foto;
-            $filename = $file->getClientOriginalName();
-            $file->move(public_path('foto'), $filename);
-
-            $data = [
-                'nama' => Request()->nama,
-                'id_hasil' => Request()->id_hasil,
-                'id_perkebunan' => Request()->id_perkebunan,
-                'id_wilayah' => Request()->id_wilayah,
-                'jenis' => Request()->jenis,
-                'jumlah' => Request()->jumlah,
-                'alamat' => Request()->alamat,
-                'posisi' => Request()->posisi,
-                'tahun' => Request()->tahun,
-                'deskripsi' => Request()->deskripsi,
-                'foto' => $filename,
-            ];
-            $this->Hasil->UpdateData($id_hasil, $data);
+            $path = $request->file('cover_image')->storeAs('public/cover_images', $fileNameToStore);
         } else {
-            //jika tidak ganti foto
-            $data = [
-                'nama' => Request()->nama,
-                'id_hasil' => Request()->id_hasil,
-                'id_perkebunan' => Request()->id_perkebunan,
-                'id_wilayah' => Request()->id_wilayah,
-                'jenis' => Request()->jenis,
-                'jumlah' => Request()->jumlah,
-                'alamat' => Request()->alamat,
-                'posisi' => Request()->posisi,
-                'tahun' => Request()->tahun,
-                'deskripsi' => Request()->deskripsi,
-            ];
-            $this->Hasil->UpdateData($id_hasil, $data);
+            $fileNameToStore = 'noimage.jpg';
         }
-        return redirect()->route('admin.hasil.index')->with('pesan', 'Data Berhasil Di Update.');
+
+
+        $user = new User();
+
+        $user->id_perkebunan = $request->id_perkebunan;
+        $user->name = $request->name;
+        $user->jenis = $request->jenis;
+        $user->jumlah = $request->jumlah;
+        $user->role = $request->role;
+        $user->telephone = $request->telephone;
+        $user->address = $request->address;
+        $user->wilayah_id = $request->wilayah;
+        $user->start = Carbon::make($request->start);
+        $user->finish = Carbon::make($request->finish);
+        $user->cover_image = $fileNameToStore;
+
+        if ($user->save()) {
+            return redirect(route('admin.hasil.index'))->with('success', "hasil Created Successfully");
+        }
     }
 
-    public function delete($id_hasil)
+
+    public function show($id)
     {
-        //hapus icon lama
-        $hasil = $this->Hasil->DetailData($id_hasil);
-        if ($hasil->foto <> "") {
-            unlink(public_path('foto') . '/' . $hasil->foto);
+        $hasil = User::findOrFail($id);
+        return view("admin.hasil.show", ['hasil' => $hasil]);
+    }
+
+    public function destroy($id)
+    {
+        $hasil = User::findOrFail($id);
+        $hasil->delete();
+
+        if ($hasil->cover_image != 'noimage.jpg') {
+            // Delete Image
+            Storage::delete('public/cover_images/' . $hasil->cover_image);
         }
-        $this->Hasil->DeleteData($id_hasil);
-        return redirect()->route('admin.hasil.index')->with('pesan', 'Data Berhasil Di Delete.');
+
+        return redirect(route('admin.hasil.index'))->with("success", "hasil Deleted Successfully");
+    }
+
+    public function update_record(Request $request, $id)
+    {
+        $this->validate($request, [
+            'id_perkebunan' => 'required',
+            'name' => 'required',
+            'role' => 'required',
+            'telephone' => 'required',
+            'address' => 'required',
+            'wilayah' => 'required',
+            'start' => 'required',
+            'finish' => 'nullable',
+            'cover_image' => 'nullable',
+        ]);
+
+        $user = User::findOrFail($id);
+        // Handle File Upload
+        if ($request->hasFile('cover_image')) {
+            // Get filename with the extension
+            $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('cover_image')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+            // Upload Image
+            $path = $request->file('cover_image')->storeAs('public/cover_images', $fileNameToStore);
+            // Delete file if exists
+            Storage::delete('public/cover_images/' . $user->cover_image);
+        }
+
+        $user->id_perkebunan = $request->id_perkebunan;
+        $user->name = $request->name;
+        $user->role = $request->role;
+        $user->telephone = $request->telephone;
+        $user->address = $request->address;
+        $user->wilayah_id = $request->wilayah;
+        $user->start = Carbon::make($request->start);
+        $user->finish = Carbon::make($request->finish);
+
+        if ($request->hasFile('cover_image')) {
+            $user->cover_image = $fileNameToStore;
+        }
+
+        $user->save(); //this will UPDATE the record
+
+        return redirect(route('admin.hasil.index'))->with("success", "hasil was updated successfully");
     }
 }

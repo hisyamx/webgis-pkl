@@ -3,101 +3,83 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use App\Models\Hasil;
+use App\Models\Perkebunan;
 use App\Models\Wilayah;
+use App\Models\Tentang;
+use App\Models\User;
 
 class WilayahController extends Controller
 {
     public function __construct()
     {
-        $this->Wilayah = new Wilayah();
         $this->middleware('auth');
     }
-
     public function index()
     {
-        $data = [
-            'title' => 'Wilayah',
-            'wilayah' => $this->Wilayah->AllData(),
-        ];
-        return view('admin.wilayah.index', $data);
+        $wilayah = Wilayah::orderBy('nama')->paginate(10);
+        return view("admin.wilayah.index", ['wilayah' => $wilayah]);
+    }
+    public function create()
+    {
+        $user = User::where('role', '!=', 1)->get();
+        return view("admin.wilayah.create", compact('user'));
     }
 
-    public function add()
+    public function store(Request $request)
     {
-        $data = [
-            'title' => 'Add Data Wilayah',
-        ];
-        return view('admin.wilayah.add', $data);
+        $this->validate($request, [
+            'nama' => 'required',
+            'geojson' => 'required',
+            'luas' => 'required',
+            'warna' => 'required'
+        ]);
+
+        // dd("in");
+        $wilayah = new Wilayah();
+
+        $wilayah->nama = request('nama');
+        $wilayah->geojson = request('geojson');
+        $wilayah->luas = request('luas');
+        $wilayah->warna = request('warna');
+
+        $wilayah->save();
+
+        return redirect(route("admin.wilayah.index"))->with("success", "wilayah Created Successfully");
     }
 
-    public function insert()
+    public function show($id_wilayah)
     {
-        Request()->validate(
-            [
-                'nama' => 'required',
-                'geojson' => 'required',
-                'luas' => 'required',
-                'warna' => 'required',
-            ],
-            [
-                'nama.required' => 'Wajib diisi',
-                'geojson.required' => 'Wajib diisi',
-                'luas.required' => 'Wajib diisi',
-                'warna.required' => 'Wajib diisi',
-            ]
-        );
-        //jika validasinya tidak ada maka lakukan simpan data ke database
+        $wilayah = Wilayah::findOrFail($id_wilayah);
+        return view("admin.wilayah.show", compact('wilayah'));
+    }
 
-        $data = [
-            'nama' => Request()->nama,
-            'geojson' => Request()->geojson,
-            'luas' => Request()->luas,
-            'warna' => Request()->warna,
-        ];
-        $this->Wilayah->InsertData($data);
-        return redirect(route('admin.wilayah.index'))->with('pesan', 'Data Berhasil Di Tambahkan');
+    public function destroy($id_wilayah)
+    {
+        $wilayah = Wilayah::findOrFail($id_wilayah);
+        $wilayah->delete();
+
+        return redirect("admin.wilayah.index")->with("success", "wilayah Deleted Successfully");
     }
 
     public function edit($id_wilayah)
     {
-        $data = [
-            'title' => 'edit Data wilayah',
-            'wilayah' => $this->Wilayah->DetailData($id_wilayah),
-        ];
-        return view('admin.wilayah.edit', $data);
+        $wilayah = Wilayah::findOrFail($id_wilayah);
+        return view("admin.wilayah.edit", compact('wilayah'));
     }
 
-    public function update($id_wilayah)
+    public function update_record($id_wilayah)
     {
-        Request()->validate(
-            [
-                'nama' => 'required',
-                'geojson' => 'required',
-                'luas' => 'required',
-                'warna' => 'required',
-            ],
-            [
-                'nama.required' => 'Wajib diisi',
-                'geojson.required' => 'Wajib diisi',
-                'luas.required' => 'Wajib diisi',
-                'warna.required' => 'Wajib diisi',
-            ]
-        );
-        //jika validasinya tidak ada maka lakukan simpan data ke database
+        $wilayah = Wilayah::findOrFail($id_wilayah);
 
-        $data = [
-            'nama' => Request()->wilayah,
-            'luas' => Request()->luas,
-            'geojson' => Request()->geojson,
-            'warna' => Request()->warna,
-        ];
-        $this->Wilayah->UpdateData($id_wilayah, $data);
-        return redirect(route('admin.wilayah.index'))->with('pesan', 'Data Berhasil Di Update.');
-    }
+        $wilayah->nama = request('nama');
+        $wilayah->geojson = request('geojson');
+        $wilayah->luas = request('luas');
+        $wilayah->warna = request('warna');
 
-    public function delete($id_wilayah)
-    {
-        $this->Wilayah->DeleteData($id_wilayah);
-        return redirect(route('admin.wilayah.index'))->with('pesan', 'Data Berhasil Di Delete.');
+        $wilayah->save(); //this will UPDATE the record with id=1
+
+        return redirect(route("admin.wilayah.index"))->with("success", "wilayah Updated Successfully");
     }
 }

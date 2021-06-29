@@ -60,7 +60,7 @@
 
     var overlayer = {
         @foreach ($wilayah as $data)
-        "{{ $data->wilayah }}" : data{{ $data->id_wilayah }},
+        "{{ $data->nama }}" : data{{ $data->id_wilayah }},
         @endforeach
         "Wilayah" : wilayah,
     };

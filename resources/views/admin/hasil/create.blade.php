@@ -46,12 +46,12 @@
                             </div>
                             <div class="mt-3">
                                 <label for="jumlah" class="form-label">Jumlah</label>
-                                <input name="jumlah" id="jumlah" type="text" class="form-control" placeholder="jumlah Kebun"
+                                <input name="jumlah" id="jumlah" type="text" class="form-control" placeholder="Jumlah Kebun"
                                     value="{{ old('jumlah') }}">
                             </div>
                             <div class="mt-3">
                                 <label for="posisi" class="form-label">Posisi</label>
-                                <input name="posisi" id="posisi" type="text" class="form-control" placeholder="posisi Kebun"
+                                <input name="posisi" id="posisi" type="text" class="form-control" placeholder="Posisi Kebun"
                                     value="{{ old('posisi') }}">
                             </div>
                             <div class="mt-3">

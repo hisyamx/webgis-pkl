@@ -41,4 +41,34 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function wilayah()
+    {
+        return $this->belongsTo(Wilayah::class, 'id_wilayah');
+    }
+
+    public function perkebunan()
+    {
+        return $this->belongsToMany(Perkebunan::class, 'id_perkebunan');
+    }
+
+    public function getRole()
+    {
+        return $this->role == 2 ? 'Users' : 'User';
+    }
+
+    public function getWilayah()
+    {
+        return $this->wilayah->nama;
+    }
+
+    public function isAdmin()
+    {
+        return $this->role == 1;
+    }
+
+    public function isNotAdmin()
+    {
+        return $this->role != 1;
+    }
 }
