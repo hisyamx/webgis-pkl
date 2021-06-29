@@ -15,7 +15,7 @@
                         </h2>
                         <div class="flex items-center sm:ml-auto mt-3 sm:mt-0">
                             <button class="btn box flex items-center text-gray-700 dark:text-gray-300">
-                                <a href="{{ route('admin.profile.add') }}">Tambah Data
+                                <a href="{{ route('admin.profile.create') }}">Tambah Data
                                     Admin</a>
                             </button>
                         </div>
@@ -32,7 +32,7 @@
                                 </tr>
                             </thead>
                             <?php $no=1; ?>
-                            @foreach ($user as $data)
+                            @foreach ($users as $data)
                             <tbody>
                                 <tr class="intro-x">
                                     <td class="w-40">{{ $no++ }}</td>

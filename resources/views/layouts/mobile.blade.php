@@ -73,6 +73,7 @@
         <div class="intro-x dropdown w-8 h-8">
             <div class="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in scale-110"
                 role="button" aria-expanded="false">
+                {{-- <img alt="Logo GIS" src="{{ asset('storage/cover_images/' . $data->cover_image)  }}"> --}}
                 <img alt="Logo GIS" src="{{ asset('dist')}}/images/profile-1.jpg">
                 {{-- <img alt="Logo GIS" src="{{asset('storage/foto/')}}"> --}}
             </div>

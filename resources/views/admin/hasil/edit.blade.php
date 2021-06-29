@@ -1,143 +1,116 @@
 @extends('layouts.master')
-
+@section('title', 'Edit Data Hasil Perkebunan')
 @section('content')
-
-<div class="col-md-12">
-    <div class="card card-outline card-primary">
-        <div class="card-header">
-        <h3 class="card-title">Edit Data</h3>
-        </div>
-        <form action="/hasil/update/{{ $hasil->id_hasil }}" method="POST" enctype="multipart/form-data">
-            @csrf
-        <div class="card-body">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Nama Hasil Perkebunan</label>
-                            <input name="nama" value="{{ $hasil->nama }}" class="form-control" placeholder="Nama hasil">
-                            <div class="text-danger">
-                                @error('nama')
-                                    {{ $message }}
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Perkebunan</label>
-                            <select name="id_perkebunan" class="form-control">
-                                <option value="{{ $hasil->id_perkebunan }}">{{ $hasil->perkebunan }}</option>
-                                @foreach ($perkebunan as $data)
-                                    <option value="{{ $data->id_perkebunan }}">{{ $data->perkebunan }}</option>
-                                @endforeach
-                            </select>
-                            <div class="text-danger">
-                                @error('id_perkebunan')
-                                    {{ $message }}
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Status</label>
-                            <select name="status" class="form-control">
-                                <option value="{{ $hasil->status }}">{{ $hasil->status }}</option>
-                                <option value="Besar">Besar</option>
-                                <option value="Kecil">Kecil</option>
-                            </select>
-                            <div class="text-danger">
-                                @error('status')
-                                    {{ $message }}
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Wilayah</label>
-                            <select name="id_wilayah" class="form-control">
-                                <option value="{{ $hasil->id_wilayah }}">{{ $hasil->wilayah }}</option>
-                                @foreach ($wilayah as $data)
-                                    <option value="{{ $data->id_wilayah }}">{{ $data->wilayah }}</option>
-                                @endforeach
-                            </select>
-                            <div class="text-danger">
-                                @error('status')
-                                    {{ $message }}
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <label>Alamat Hasil</label>
-                            <input name="alamat" value="{{ $hasil->alamat }}" class="form-control" placeholder="Alamat hasil">
-                            <div class="text-danger">
-                                @error('alamat')
-                                    {{ $message }}
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Posisi Hasil Perkebunan</label>
-                            <input name="posisi" value="{{ $hasil->posisi }}" id="posisi" class="form-control" placeholder="Posisi hasil" readonly>
-                            <div class="text-danger">
-                                @error('posisi')
-                                    {{ $message }}
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Foto Hasil Perkebunan</label>
-                                <input type="file" name="foto" class="form-control" accept="image/jpeg,image/png">
-                            <div class="text-danger">
-                                @error('foto')
-                                    {{ $message }}
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12">
-                        <label>Map</label><label class="text-danger">(Drag and Drop Marker Atau Klik Map Untuk Menentukan Posisi hasil)</label>
-                        <div id="map" style="width: 100%; height: 300px;"></div>
-                    </div>
-
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <label>Deskripsi</label>
-                            <textarea name="deskripsi" class="form-control" placeholder="Deskripsi" rows="5">{{ $hasil->deskripsi }}</textarea>
-                            <div class="text-danger">
-                                @error('deskripsi')
-                                    {{ $message }}
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-        </div>
-
-    <div class="card-footer">
-        <button type="submit" class="btn btn-info"><i class="fa fa-save"></i> Simpan</button>
-        <button type="submit" class="btn btn-warning float-right">Batal</button>
+<!-- BEGIN: Content -->
+<div class="content">
+    <div class="intro-y flex items-center mt-5">
+        <h2 class="text-lg font-medium mr-auto">
+            Edit Data Hasil Perkebunan
+        </h2>
     </div>
-</form>
-</div>
-</div>
+    <div class="grid grid-cols-12 gap-6 mt-5">
+        <div class="intro-y col-span-12 lg:col-span-12">
+            <!-- BEGIN: Input -->
+            <div class="intro-y box">
+                <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200 dark:border-dark-5">
+                    <h2 class="font-medium text-base mr-auto">
+                        Edit Data Hasil Perkebunan {{ $hasil->nama }}
+                    </h2>
+                </div>
+                <div id="input" class="p-5">
+                    <div class="preview">
+                        <form action="{{ route('admin.hasil.edit', $hasil->id_hasil) }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div>
+                                <label for="nama" class="form-label">Nama Hasil Perkebunan</label>
+                                <input name="nama" id="nama" type="text" class="form-control" placeholder="Nama Hasil Perkebunan"
+                                    value="{{ $hasil->nama }}">
+                            </div>
+                            <div class="mt-3">
+                                <label for="jenis" class="form-label">Jenis</label>
+                                <select name="jenis" class="form-control">
+                                <option value="{{ $hasil->jenis }}">--Jenis Perkebunan--</option>
+                                    <option value="Besar">Besar</option>
+                                    <option value="Kecil">Kecil</option>
+                                </select>
+                            </div>
+                            <div class="mt-3">
+                                <label for="id_perkebunan" class="form-label">Perkebunan</label>
+                                <select name="id_perkebunan" class="form-control">
+                                <option value="{{ $hasil->perkebunan->nama }}">--Pilih Perkebunan--</option>
+                                @foreach ($perkebunan as $data)
+                                    <option value="{{ $data->id_perkebunan }}">{{ $data->nama }}</option>
+                                @endforeach
+                                </select>
+                            </div>
+                            <div class="mt-3">
+                                <label for="id_wilayah" class="form-label">Wilayah</label>
+                                <select name="id_wilayah" class="form-control">
+                                <option value="{{ $hasil->wilayah->nama }}">--Pilih Wilayah--</option>
+                                @foreach ($wilayah as $data)
+                                    <option value="{{ $data->id_wilayah }}">{{ $data->nama }}</option>
+                                @endforeach
+                                </select>
+                            </div>
+                            <div class="mt-3">
+                                <label for="jumlah" class="form-label">Jumlah Hasil Perkebunan</label>
+                                <div class="grid-cols-3 gap-2">
+                                    <div class="input-group">
+                                        <div id="input-group-3" class="input-group-text">Kuintal</div>
+                                        <input type="text" class="form-control" placeholder="Jumlah Hasil"
+                                            aria-describedby="input-group-12" name="jumlah" value="{{ $hasil->jumlah }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <label for="tahun" class="form-label">Tahun Hasil Perkebunan</label>
+                                <input name="tahun" id="tahun" type="text" class="form-control" placeholder="Tahun Hasil Perkebunan"
+                                value="{{ $hasil->tahun }}">
+                            </div>
+                            <div class="mt-3">
+                                <label for="deskripsi" class="form-label">Deskripsi Perkebunan (Opsional)</label>
+                                <textarea name="deskripsi" id="deskripsi" rows="7" type="text" class="form-control"
+                                placeholder="Deskripsi Perkebunan">{{ $hasil->deskripsi }}</textarea>
+                            </div>
+                            <div class="mt-3">
+                                <label for="cover_image" class="form-label">Tambahkan Foto</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="customFile" name="cover_image">
+                                </div>
+                            </div>
 
+                            <div class="mt-3">
+                                <label for="posisi" class="form-label">Posisi</label>
+                                <input name="posisi" id="posisi" type="text" class="form-control" placeholder="Posisi Kebun"
+                                    value="{{ $hasil->posisi }}" readonly>
+                            </div>
+                            <div class="mt-3">
+                                <label for="luas" class="form-label">Maps <span>(Drag and Drop Marker Atau Klik Map Untuk Menentukan Posisi Hasil Perkebunan)</span></label>
+                                <div id="map" style="width: 100%; height: 500px;"></div>
+                            </div>
+                            {{-- <div class="text-right mt-5"> --}}
+                                <button type="submit" class="btn btn-primary w-24 mt-5">Tambah</button>
+                            {{-- </div> --}}
+                        </form>
+                        <!-- END: Form Layout -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END: Content -->
+@endsection
+
+{{-- @section('page-css')
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/css/bootstrap-select.min.css">
+@endsection --}}
+
+
+@section('page-js')
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js">
+</script> --}}
 
 <script>
     var peta1 = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
@@ -166,10 +139,23 @@
         id: 'mapbox/dark-v10'
     });
 
+    @foreach ($wilayah as $data)
+    var data{{ $data->id_wilayah }} = L.layerGroup();
+    @endforeach
+
+    var wilayah = L.layerGroup();
+
+
+
     var map = L.map('map', {
-        center: [{{ $hasil->posisi }}],
-        zoom: 14,
-        layers: [peta1],
+        center: [-7.031013404745716, 109.62808439037346],
+        zoom: 10,
+        layers: [peta1,
+        @foreach ($wilayah as $data)
+            data{{ $data->id_wilayah }},
+        @endforeach
+        wilayah,
+        ]
     });
 
     var baseMaps = {
@@ -179,10 +165,29 @@
         "Dark": peta4,
     };
 
+    var overlayer = {
+        @foreach ($wilayah as $data)
+        "{{ $data->wilayah }}" : data{{ $data->id_wilayah }},
+        @endforeach
+        "Wilayah" : wilayah,
+    };
+
     L.control.layers(baseMaps).addTo(map);
 
+
+    @foreach ($wilayah as $data)
+        L.geoJSON(<?= $data->geojson ?>,{
+            style : {
+                color : 'white',
+                fillColor : '{{ $data->warna }}',
+                fillOpacity : 1.0,
+            },
+        }).addTo(data{{ $data->id_wilayah }});
+    @endforeach
+
+
     //mengambil titik koordinat
-    var curLocation = [{{ $hasil->posisi }}];
+    var curLocation = [-7.031013404745716, 109.62808439037346];
     map.attributionControl.setPrefix(false);
 
     var marker = new L.marker(curLocation,{
@@ -217,5 +222,3 @@
 </script>
 
 @endsection
-
-

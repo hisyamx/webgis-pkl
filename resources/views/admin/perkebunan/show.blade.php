@@ -34,12 +34,14 @@
                                     </div>
                                 </div>
                             </div> --}}
-                            <div class="media align-items-center">
-                                <a href="#" class="avatar rounded-circle">
-                                    <img class="h-100 w-100" alt="Image placeholder"
-                                        src="{{asset('storage/cover_images/'.$perkebunan->cover_image)}}">
-                                </a>
-                            </div>
+                            <td class="w-40">
+                                <div class="flex">
+                                    <div class="w-24 h-24 image-fit zoom-in">
+                                        <img alt="Warna" class="tooltip rounded-full"
+                                        src="{{ asset('storage/cover_images/' . $perkebunan->cover_image)  }}">
+                                    </div>
+                                </div>
+                            </td>
                         </div>
 
                         {{-- <div class="text-right mt-5"> --}}
@@ -69,7 +71,7 @@
 </script> --}}
 @endsection
 
-@section('page-css')
+{{-- @section('page-css')
 <style>
     .media {
     display: flex;
@@ -98,4 +100,4 @@
     border-radius: 50% !important
 }
 </style>
-@endsection
+@endsection --}}

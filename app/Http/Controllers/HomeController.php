@@ -12,6 +12,13 @@ use App\Models\User;
 
 class HomeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->Hasil = new Hasil();
+        $this->Perkebunan = new Perkebunan();
+        $this->Wilayah = new Wilayah();
+    }
     public function index()
     {
         $wilayah_count = Wilayah::all()->count();

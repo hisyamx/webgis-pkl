@@ -19,7 +19,7 @@
                 </div>
                 <div id="input" class="p-5">
                     <div class="preview">
-                        <form action="{{ route('admin.profile.insert') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.profile.create') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div>
                                 <label for="nama" class="form-label">Nama</label>

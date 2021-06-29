@@ -10,13 +10,19 @@ use App\Models\Wilayah;
 use App\Models\Tentang;
 use App\Models\User;
 
-
 class HasilController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->Hasil = new Hasil();
+        $this->Perkebunan = new Perkebunan();
+        $this->Wilayah = new Wilayah();
+    }
     public function index()
     {
         $wilayah = Wilayah::orderBy('nama')->get();
-        $hasil = User::hasil()->orderBy('nama')->get();
+        $hasil = Hasil::orderBy('nama')->get();
 
         return view("admin.hasil.index", ['hasil' => $hasil, 'wilayah' => $wilayah]);
     }
@@ -24,33 +30,34 @@ class HasilController extends Controller
     public function create()
     {
         $wilayah = Wilayah::all();
-        $users = User::where('role', '!=', 1)->get();
+        $perkebunan = Perkebunan::all();
+        $users = Hasil::where('role', '!=', 1)->get();
         if (count($wilayah) <  1) {
             return redirect("wilayah.index")->with("error", "You must create a wilayah before creating an hasil");
         }
-        return view("admin.hasil.create", compact(['wilayah', 'users']));
+        return view("admin.hasil.create", compact(['wilayah', 'perkebunan', 'users']));
     }
 
-    public function edit($id)
+    public function edit($id_hasil)
     {
-        $hasil = User::findOrFail($id);
+        $hasil = Hasil::findOrFail($id_hasil);
         $wilayah = Wilayah::all();
-        return view("admin.hasil.edit", ['hasil' => $hasil], ['wilayah' => $wilayah]);
+        $perkebunan = Perkebunan::all();
+        return view("admin.hasil.edit", compact(['wilayah', 'perkebunan', 'hasil']));
     }
 
     public function store(Request $request)
     {
         $this->validate($request, [
+            'id_wilayah' => 'required',
             'id_perkebunan' => 'required',
             'nama' => 'required',
             'jenis' => 'required',
             'jumlah' => 'required',
-            'role' => 'required',
-            'telephone' => 'required',
-            'address' => 'required',
-            'wilayah' => 'required',
-            'start' => 'required',
-            'finish' => 'nullable',
+            'posisi' => 'required',
+            // 'alamat' => 'required',
+            'deskripsi' => 'required',
+            'tahun' => 'nullable',
             'cover_image' => 'nullable',
         ]);
 
@@ -71,36 +78,34 @@ class HasilController extends Controller
             $fileNameToStore = 'noimage.jpg';
         }
 
+        $hasil = new Hasil();
 
-        $user = new User();
+        $hasil->id_wilayah = $request->id_wilayah;
+        $hasil->id_perkebunan = $request->id_perkebunan;
+        $hasil->nama = $request->nama;
+        $hasil->jenis = $request->jenis;
+        $hasil->jumlah = $request->jumlah;
+        $hasil->posisi = $request->posisi;
+        // $hasil->alamat = $request->alamat;
+        $hasil->deskripsi = $request->deskripsi;
+        $hasil->tahun = $request->tahun;
+        $hasil->cover_image = $fileNameToStore;
 
-        $user->id_perkebunan = $request->id_perkebunan;
-        $user->name = $request->name;
-        $user->jenis = $request->jenis;
-        $user->jumlah = $request->jumlah;
-        $user->role = $request->role;
-        $user->telephone = $request->telephone;
-        $user->address = $request->address;
-        $user->wilayah_id = $request->wilayah;
-        $user->start = Carbon::make($request->start);
-        $user->finish = Carbon::make($request->finish);
-        $user->cover_image = $fileNameToStore;
-
-        if ($user->save()) {
+        if ($hasil->save()) {
             return redirect(route('admin.hasil.index'))->with('success', "hasil Created Successfully");
         }
     }
 
 
-    public function show($id)
+    public function show($id_hasil)
     {
-        $hasil = User::findOrFail($id);
+        $hasil = Hasil::findOrFail($id_hasil);
         return view("admin.hasil.show", ['hasil' => $hasil]);
     }
 
-    public function destroy($id)
+    public function destroy($id_hasil)
     {
-        $hasil = User::findOrFail($id);
+        $hasil = Hasil::findOrFail($id_hasil);
         $hasil->delete();
 
         if ($hasil->cover_image != 'noimage.jpg') {
@@ -111,21 +116,22 @@ class HasilController extends Controller
         return redirect(route('admin.hasil.index'))->with("success", "hasil Deleted Successfully");
     }
 
-    public function update_record(Request $request, $id)
+    public function update_record(Request $request, $id_hasil)
     {
         $this->validate($request, [
+            'id_wilayah' => 'required',
             'id_perkebunan' => 'required',
-            'name' => 'required',
-            'role' => 'required',
-            'telephone' => 'required',
-            'address' => 'required',
-            'wilayah' => 'required',
-            'start' => 'required',
-            'finish' => 'nullable',
+            'nama' => 'required',
+            'jenis' => 'required',
+            'jumlah' => 'required',
+            'posisi' => 'required',
+            // 'alamat' => 'required',
+            'deskripsi' => 'required',
+            'tahun' => 'nullable',
             'cover_image' => 'nullable',
         ]);
 
-        $user = User::findOrFail($id);
+        $hasil = Hasil::findOrFail($id_hasil);
         // Handle File Upload
         if ($request->hasFile('cover_image')) {
             // Get filename with the extension
@@ -139,23 +145,24 @@ class HasilController extends Controller
             // Upload Image
             $path = $request->file('cover_image')->storeAs('public/cover_images', $fileNameToStore);
             // Delete file if exists
-            Storage::delete('public/cover_images/' . $user->cover_image);
+            Storage::delete('public/cover_images/' . $hasil->cover_image);
         }
 
-        $user->id_perkebunan = $request->id_perkebunan;
-        $user->name = $request->name;
-        $user->role = $request->role;
-        $user->telephone = $request->telephone;
-        $user->address = $request->address;
-        $user->wilayah_id = $request->wilayah;
-        $user->start = Carbon::make($request->start);
-        $user->finish = Carbon::make($request->finish);
+        $hasil->id_wilayah = $request->id_wilayah;
+        $hasil->id_perkebunan = $request->id_perkebunan;
+        $hasil->nama = $request->nama;
+        $hasil->jenis = $request->jenis;
+        $hasil->jumlah = $request->jumlah;
+        $hasil->posisi = $request->posisi;
+        // $hasil->alamat = $request->alamat;
+        $hasil->deskripsi = $request->deskripsi;
+        $hasil->tahun = $request->tahun;
 
         if ($request->hasFile('cover_image')) {
-            $user->cover_image = $fileNameToStore;
+            $hasil->cover_image = $fileNameToStore;
         }
 
-        $user->save(); //this will UPDATE the record
+        $hasil->save(); //this will UPDATE the record
 
         return redirect(route('admin.hasil.index'))->with("success", "hasil was updated successfully");
     }

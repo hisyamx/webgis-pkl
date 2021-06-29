@@ -7,7 +7,7 @@
 </div>
 
 <div class="col-sm-6">
-    <img src="{{ asset('foto') }}/{{ $hasil->foto }}" width="100%" height="400px">
+    <img src="{{ asset('storage/cover_images/' . $data->wilayah->cover_image)  }}" width="100%" height="400px">
 </div>
 
 <div class="col-sm-12">
@@ -22,17 +22,17 @@
         <tr>
             <td>Perkebunan</td>
             <td>:</td>
-            <td>{{ $hasil->perkebunan }}</td>
+            <td>{{ $hasil->perkebunan->nama }}</td>
         </tr>
         <tr>
-            <td>wilayah</td>
+            <td>Wilayah</td>
             <td>:</td>
-            <td>{{ $hasil->wilayah }}</td>
+            <td>{{ $hasil->wilayah->nama }}</td>
         </tr>
         <tr>
-            <td>Alamat hasil</td>
+            <td>Posisi hasil</td>
             <td>:</td>
-            <td>{{ $hasil->alamat }}</td>
+            <td>{{ $hasil->posisi }}</td>
         </tr>
     </table>
 </div>

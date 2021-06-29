@@ -40,11 +40,11 @@
                                         <a href="" class="font-medium whitespace-nowrap">{{ $data->nama }}</a>
                                     </td>
                                     <td class="w-40">
-                                        <div class="media align-items-center">
-                                            <a href="#" class="avatar rounded-circle">
-                                                <img class="h-100 w-100" alt="Image placeholder"
-                                                    src="{{asset('storage/cover_images/'.$data->cover_image)}}">
-                                            </a>
+                                        <div class="flex">
+                                            <div class="w-10 h-10 image-fit zoom-in">
+                                                <img alt="Warna" class="tooltip rounded-full"
+                                                src="{{ asset('storage/cover_images/' . $data->cover_image)  }}">
+                                            </div>
                                         </div>
                                     </td>
                                     <td class="table-report__action w-56">
@@ -100,7 +100,7 @@
 @endforeach --}}
 
 @endsection
-@section('page-css')
+{{-- @section('page-css')
 <style>
     .media {
     display: flex;
@@ -129,4 +129,4 @@
     border-radius: 50% !important
 }
 </style>
-@endsection
+@endsection --}}

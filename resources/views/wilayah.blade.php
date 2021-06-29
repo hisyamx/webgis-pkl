@@ -6,7 +6,7 @@
 <div class="col-sm-12">
     <br>
     <br>
-    <div class="text-center"><h2><b>Data Hasil {{ $title }}</b></h2></div>
+    <div class="text-center"><h2><b>Data Hasil</b></h2></div>
     <table id="example1" class="table table-bordered table-striped">
         <thead>
             <tr>
@@ -69,12 +69,12 @@
         var perkebunan{{ $data->id_perkebunan }} = L.layerGroup();
     @endforeach
 
-    var data{{ $wil->id_wilayah }} = L.layerGroup();
+    var data{{ $kec->id_wilayah }} = L.layerGroup();
 
     var map = L.map('map', {
         center: [-0.932910117571772, 100.39606514807615],
         zoom: 11,
-        layers: [peta2,data{{ $wil->id_wilayah }},
+        layers: [peta2,data{{ $kec->id_wilayah }},
         @foreach ($perkebunan as $data)
             perkebunan{{ $data->id_perkebunan }},
         @endforeach
@@ -90,36 +90,40 @@
     };
 
     var overlayer = {
-        "{{ $wil->wilayah }}" : data{{ $wil->id_wilayah }},
+        "{{ $kec->kecamatan }}" : data{{ $kec->id_wilayah }},
         @foreach ($perkebunan as $data)
         "{{ $data->perkebunan }}" : perkebunan{{ $data->id_perkebunan }},
         @endforeach
     };
 
+
+
     L.control.layers(baseMaps, overlayer).addTo(map);
 
-        var wil = L.geoJSON(<?= $wil->geojson ?>,{
+
+        var kec = L.geoJSON(<?= $kec->geojson ?>,{
             style : {
                 color : 'white',
-                fillColor : '{{ $wil->warna }}',
+                fillColor : '{{ $kec->warna }}',
                 fillOpacity : 1.0,
             },
-        }).addTo(data{{ $wil->id_wilayah }});
+        }).addTo(data{{ $kec->id_wilayah }});
 
-        map.fitBounds(wil.getBounds());
+        map.fitBounds(kec.getBounds());
 
-    @foreach ($hasil as $data)
-    var ikonhasil = L.ikon({
-        ikonUrl: '{{  asset('ikon') }}/{{ $data->ikon }}',
-        ikonSize:     [60, 60],
+    @foreach ($wilayah as $data)
+    var cover_imagewilayah = L.cover_image({
+        cover_imageUrl: '{{  asset('cover_image') }}/{{ $data->cover_image }}',
+        cover_imageSize:     [60, 60],
     });
 
-    var informasi = '<table class="table table-bordered"><tr><td colspan="2"><img src="{{  asset('foto') }}/{{ $data->foto }}" width="250px"></td></tr><tbody><tr><td>Nama hasil</td><td>: {{ $data->nama }}</td></tr><tr><td>perkebunan</td><td>: {{ $data->perkebunan }}</td></tr><tr><td>Status</td><td>: {{ $data->status }}</td></tr><tr><td colspan="2" class="text-center"><a href="/detailhasil/{{ $data->id_hasil }}" class="btn btn-sm btn-default">Detail</a></td></tr></tbody></table>';
+    var informasi = '<table class="table table-bordered"><tr><td colspan="2"><img src="{{  asset('foto') }}/{{ $data->foto }}" width="250px"></td></tr><tbody><tr><td>Nama wilayah</td><td>: {{ $data->id_wilayah }}</td></tr><tr><td>Perkebunan</td><td>: {{ $data->id_perkebunan }}</td></tr><tr><td>Jenis</td><td>: {{ $data->jenis }}</td></tr><tr><td colspan="2" class="text-center"><a href="{{ route(user.detailhasil),'$data->id_hasil' }}" class="btn btn-sm btn-default">Detail</a></td></tr></tbody></table>';
 
-     L.marker([<?= $data->posisi ?>],{ikon: ikonhasil})
-     .addTo(perkebunan{{ $data->id_perkebunan }})
-     .bindPopup(informasi);
-   @endforeach
+    L.marker([<?= $data->posisi ?>],{cover_image: cover_imagewilayah})
+    .addTo(wilayah)
+    .bindPopup(informasi);
+    @endforeach
+
 </script>
 
 <script>

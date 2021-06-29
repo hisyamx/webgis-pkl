@@ -31,39 +31,40 @@ class ViewController extends Controller
         return view('web', compact(['wilayah', 'wilayah_count', 'perkebunan', 'perkebunan_count', 'hasil', 'hasil_count']));
     }
 
-    public function wilayah($id)
+    public function tentang()
     {
-        $wilayah = $this->View->DetailWilayah($id);
-        $data = [
-            'title' => 'Wilayah ' . $wilayah->wilayah,
-            'wilayah' => $this->View->DataWilayah(),
-            'hasil' => $this->View->DataHasil($id),
-            'perkebunan' => $this->View->DataPerkebunan()
-        ];
-        return view('wilayah', $data);
+        $wilayah = Wilayah::all();
+        $perkebunan = Perkebunan::all();
+        $hasil = Hasil::all();
+        $tentang = Tentang::all();
+        return view('tentang', compact(['tentang', 'wilayah', 'perkebunan', 'hasil']));
     }
 
-    public function perkebunan($id)
+
+    public function wilayah($id_wilayah)
     {
-        $perkebunan = $this->View->DetailPerkebunan($id);
-        $data = [
-            'title' => 'Perkebunan ' . $perkebunan->perkebunan,
-            'wilayah' => $this->View->DataWilayah(),
-            'hasil' => $this->View->DataHasilPerkebunan($id),
-            'perkebunan' => $this->View->DataPerkebunan(),
-        ];
-        return view('wilayah', $data);
+        $wilayahfind = Wilayah::findOrFail($id_wilayah);
+        $wilayah = Wilayah::all();
+        $perkebunan = Perkebunan::all();
+        $hasil = Hasil::all();
+        return view('wilayah', compact(['wilayah', 'wilayahfind', 'perkebunan', 'hasil']));
     }
 
-    public function detailhasil($id)
+    public function perkebunan($id_perkebunan)
     {
-        $hasil = $this->View->DetailDataHasil($id);
-        $data = [
-            'title' => 'Detail ' . $hasil->nama_hasil,
-            'wilayah' => $this->View->DataKecamatan(),
-            'perkebunan' => $this->View->DataJenjang(),
-            'hasil' => $hasil,
-        ];
-        return view('detailhasil', $data);
+        $perkebunanfind = Perkebunan::findOrFail($id_perkebunan);
+        $wilayah = Wilayah::all();
+        $perkebunan = Perkebunan::all();
+        $hasil = Hasil::all();
+        return view('perkebunan', compact(['wilayah', 'perkebunanfind', 'perkebunan', 'hasil']));
+    }
+
+    public function detailhasil($id_hasil)
+    {
+        $hasilfind = Hasil::findOrFail($id_hasil);
+        $wilayah = Wilayah::all();
+        $perkebunan = Perkebunan::all();
+        $hasil = Hasil::all();
+        return view('detailhasil', compact(['wilayah', 'hasilfind', 'perkebunan', 'hasil']));
     }
 }

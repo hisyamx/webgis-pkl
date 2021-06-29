@@ -31,7 +31,7 @@
                                 <label for="luas" class="form-label">Luas</label>
                                 <div class="grid-cols-3 gap-2">
                                     <div class="input-group">
-                                        <div id="input-group-3" class="input-group-text">Hektar</div>
+                                        <div id="input-group-3" class="input-group-text">Kilometer Persegi</div>
                                         <input type="text" class="form-control" placeholder="Luas Kecamatan"
                                             aria-describedby="input-group-12" name="luas" value="{{ old('luas') }}">
                                     </div>

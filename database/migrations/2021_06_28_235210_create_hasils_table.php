@@ -22,11 +22,11 @@ class CreateHasilsTable extends Migration
 
             $table->string('jumlah');
             $table->string('posisi');
-            $table->string('alamat');
+            // $table->string('alamat');
 
-            $table->dateTime('tahun')->nullable();
+            $table->string('tahun')->nullable();
 
-            $table->string('foto')->nullable();
+            $table->string('cover_image')->nullable();
             $table->string('deskripsi');
 
             $table->timestamps();

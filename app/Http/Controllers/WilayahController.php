@@ -18,7 +18,7 @@ class WilayahController extends Controller
     }
     public function index()
     {
-        $wilayah = Wilayah::orderBy('nama')->paginate(10);
+        $wilayah = Wilayah::orderBy('nama')->paginate(21);
         return view("admin.wilayah.index", ['wilayah' => $wilayah]);
     }
     public function create()
@@ -46,7 +46,7 @@ class WilayahController extends Controller
 
         $wilayah->save();
 
-        return redirect(route("admin.wilayah.index"))->with("success", "wilayah Created Successfully");
+        return redirect(route("admin.wilayah.index"))->with("success", "Wilayah Created Successfully");
     }
 
     public function show($id_wilayah)
@@ -60,7 +60,7 @@ class WilayahController extends Controller
         $wilayah = Wilayah::findOrFail($id_wilayah);
         $wilayah->delete();
 
-        return redirect("admin.wilayah.index")->with("success", "wilayah Deleted Successfully");
+        return redirect("admin.wilayah.index")->with("success", "Wilayah Deleted Successfully");
     }
 
     public function edit($id_wilayah)
@@ -80,6 +80,6 @@ class WilayahController extends Controller
 
         $wilayah->save(); //this will UPDATE the record with id=1
 
-        return redirect(route("admin.wilayah.index"))->with("success", "wilayah Updated Successfully");
+        return redirect(route("admin.wilayah.index"))->with("success", "Wilayah Updated Successfully");
     }
 }
