@@ -31,7 +31,7 @@ class HasilController extends Controller
     {
         $wilayah = Wilayah::all();
         $perkebunan = Perkebunan::all();
-        $users = Hasil::where('role', '!=', 1)->get();
+        $users = User::where('role', '!=', 1)->get();
         if (count($wilayah) <  1) {
             return redirect("wilayah.index")->with("error", "You must create a wilayah before creating an hasil");
         }

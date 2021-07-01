@@ -13,7 +13,7 @@ class Hasil extends Model
 
     public function wilayah()
     {
-        return $this->hasOne(Wilayah::class, 'id_wilayah', 'id_perkebunan');
+        return $this->hasOne(Wilayah::class, 'id_wilayah', 'id_wilayah');
     }
 
     public function perkebunan()

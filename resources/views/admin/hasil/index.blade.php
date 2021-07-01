@@ -30,7 +30,6 @@
                                     <th class="text-center whitespace-nowrap">Jenis Kebun</th>
                                     <th class="text-center whitespace-nowrap">Jumlah</th>
                                     <th class="text-center whitespace-nowrap">Wilayah</th>
-                                    <th class="text-center whitespace-nowrap">Posisi</th>
                                     <th class="text-center whitespace-nowrap">Tahun</th>
                                     <th class="whitespace-nowrap">Foto</th>
                                     <th class="whitespace-nowrap">Deskripsi</th>
@@ -52,7 +51,6 @@
                                     <td>
                                         <a href="" class="text-center whitespace-nowrap">{{ $data->wilayah->nama }}</a>
                                     </td>
-                                    <td class="text-center">{{ $data->posisi }}</td>
                                     <td class="text-center">{{ $data->tahun }}</td>
                                     <td class="w-40">
                                         <div class="flex">
@@ -62,7 +60,7 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="whitespace-nowrap">{{ $data->deskripsi }}</td>
+                                    <td class="whitespace-nowrap">{{ Str::limit($data->deskripsi, 20 )}}</td>
                                     <td class="table-report__action w-56">
                                         <div class="flex justify-center items-center">
                                             <a class="flex items-center mr-3"

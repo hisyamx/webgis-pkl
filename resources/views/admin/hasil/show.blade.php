@@ -45,14 +45,19 @@
                                 value="{{ $hasil->wilayah->nama }}" disabled>
                         </div>
                         <div class="mt-3">
-                            <label for="posisi" class="form-label">Wilayah</label>
+                            <label for="posisi" class="form-label">Posisi Koordinat</label>
                             <input name="posisi" id="posisi" type="text" class="form-control" placeholder="posisi Kebun"
                                 value="{{ $hasil->posisi }}" disabled>
                         </div>
                         <div class="mt-3">
-                            <label for="tahun" class="form-label">Wilayah</label>
+                            <label for="tahun" class="form-label">Tahun</label>
                             <input name="tahun" id="tahun" type="text" class="form-control" placeholder="tahun Kebun"
                                 value="{{ $hasil->tahun }}" disabled>
+                        </div>
+                        <div class="mt-3">
+                            <label for="tahun" class="form-label">Deskripsi</label>
+                            <input name="tahun" id="tahun" type="text" class="form-control" placeholder="tahun Kebun"
+                                value="{{ $hasil->deskripsi }}" disabled>
                         </div>
                         {{-- <div class="text-right mt-5"> --}}
                         {{-- </div> --}}

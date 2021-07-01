@@ -79,11 +79,11 @@
 
     @foreach ($hasil as $data)
     var cover_imagewilayah = L.icon({
-        iconUrl: '{{ asset('storage/cover_images/' . $data->wilayah->cover_image)  }}',
+        iconUrl: '{{ asset('storage/cover_images/' . $data->cover_image)  }}',
         iconSize:     [60, 60],
     });
 
-    var informasi = '<table class="table table-bordered"><tr><td colspan="2"><img src="{{ asset('storage/cover_images/' . $data->cover_image)  }}" width="250px"></td></tr><tbody><tr><td>Nama Hasil Perkebunan</td><td>: {{ $data->nama }}</td></tr><tr><td>Perkebunan</td><td>: {{ $data->perkebunan->nama }}</td></tr><tr><td>Jenis</td><td>: {{ $data->jenis }}</td></tr><tr><td colspan="2" class="text-center"><a href="{{ route('user.detailhasil',$data->id_hasil) }}" class="btn btn-sm btn-default">Detail</a></td></tr></tbody></table>';
+    var informasi = '<table class="table table-bordered"><tr><td colspan="2"><img src="{{ asset('storage/cover_images/' . $data->cover_image)  }}" width="250px"></td></tr><tbody><tr><td>Nama Hasil Perkebunan</td><td>: {{ $data->nama }}</td></tr><tr><td>Perkebunan</td><td>: {{ $data->perkebunan->nama }}</td></tr><tr><td>Jenis</td><td>: {{ $data->jenis }}</td></tr><tr><td>Keterangan</td><td>: {{ $data->deskripsi }}</td></tr></tbody></table>';
 
     L.marker([<?= $data->posisi ?>])
      .addTo(wilayah)

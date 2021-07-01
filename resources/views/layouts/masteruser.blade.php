@@ -38,7 +38,7 @@
                         Dashboard </div>
                 </a>
             </li>
-            <li class="side-nav__devider my-6"></li>
+            {{-- <li class="side-nav__devider my-6"></li>
             <li>
                 <a href="javascript:;" class="menu">
                     <div class="menu__icon"> <i data-feather="box"></i> </div>
@@ -72,7 +72,7 @@
                     </li>
                     @endforeach
                 </ul>
-            </li>
+            </li> --}}
             <li>
                 <a href="{{ route('user.tentang')}}" class="menu">
                     <div class="menu__icon"> <i data-feather="info"></i> </div>
@@ -104,7 +104,7 @@
                         Dashboard </div>
                 </a>
             </li>
-            <li>
+            {{-- <li>
                 <a href="#" class="top-menu">
                     <div class="top-menu__icon"> <i data-feather="box"></i> </div>
                     <div class="top-menu__title">
@@ -137,7 +137,7 @@
                     </li>
                     @endforeach
                 </ul>
-            </li>
+            </li> --}}
             <li>
                 <a href="{{ route('user.tentang')}}" class="top-menu">
                     <div class="top-menu__icon"> <i data-feather="info"></i> </div>

@@ -4,9 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\ViewController;
-use App\Http\Controllers\KecamatanController;
-use App\Http\Controllers\JenjangController;
-use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\WilayahController;
 use App\Http\Controllers\PerkebunanController;
@@ -83,15 +80,15 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     // ------------------------- Kelola Admin -------------------------
     // > Admin
     //Get Requests
-    Route::get("/profile", [AdminController::class, 'index'])->name('admin.profile.index');
-    Route::get("/profile/create", [AdminController::class, 'create'])->name('admin.profile.create');
-    Route::get("/profile/edit/{id}", [AdminController::class, 'edit'])->name('admin.profile.edit');
-    Route::get("/profile/show/{id}", [AdminController::class, 'show'])->name('admin.profile.show');
+    Route::get("/profile", [UserController::class, 'index'])->name('admin.profile.index');
+    Route::get("/profile/create", [UserController::class, 'create'])->name('admin.profile.create');
+    Route::get("/profile/edit/{id}", [UserController::class, 'edit'])->name('admin.profile.edit');
+    Route::get("/profile/show/{id}", [UserController::class, 'show'])->name('admin.profile.show');
     //Post Requests
-    Route::post("/profile/store", [AdminController::class, 'store'])->name('admin.profile.store');
-    Route::post("/profile/edit/{id}", [AdminController::class, 'update_record'])->name('admin.profile.edit');
+    Route::post("/profile/store", [UserController::class, 'store'])->name('admin.profile.store');
+    Route::post("/profile/edit/{id}", [UserController::class, 'update_record'])->name('admin.profile.edit');
     // Delete Request
-    Route::delete("/profile/delete/{id}", [AdminController::class, 'destroy'])->name('admin.profile.delete');
+    Route::delete("/profile/delete/{id}", [UserController::class, 'destroy'])->name('admin.profile.delete');
 
     // ------------------------- Kelola Tentang -------------------------
     // > Tentang

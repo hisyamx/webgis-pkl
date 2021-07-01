@@ -35,7 +35,7 @@
                             <tbody>
                                 <tr class="intro-x">
                                     <td class="whitespace-nowrap">{{ $no++ }}</td>
-                                    <td class="whitespace-nowrap">{{ $data->deskripsi }}</td>
+                                    <td class="whitespace-nowrap">{{ Str::limit($data->deskripsi, 70 ) }}</td>
                                     <td class="table-report__action w-56">
                                         <div class="flex justify-center items-center">
                                             <a class="flex items-center mr-3"

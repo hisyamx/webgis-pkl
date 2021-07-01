@@ -12,8 +12,6 @@
                 <th width="50px" class="text-center">No</th>
                 <th class="text-center">Nama hasil</th>
                 <th width="50px" class="text-center">Perkebunan</th>
-                <th class="text-center">Status</th>
-                <th class="text-center">Coordinat</th>
             </tr>
         </thead>
         <tbody>
@@ -23,10 +21,6 @@
                     <td class="text-center">{{ $no++ }}</td>
                     <td>{{ $data->nama }}</td>
                     <td>{{ $data->perkebunan }}</td>
-                    <td>{{ $data->status }}</td>
-                    <td>{{ $data->posisi }}</td>
-
-
                 </tr>
             @endforeach
         </tbody>

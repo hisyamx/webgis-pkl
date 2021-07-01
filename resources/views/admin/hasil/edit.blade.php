@@ -37,7 +37,7 @@
                             <div class="mt-3">
                                 <label for="id_perkebunan" class="form-label">Perkebunan</label>
                                 <select name="id_perkebunan" class="form-control">
-                                <option value="{{ $hasil->perkebunan->nama }}">--Pilih Perkebunan--</option>
+                                <option value="{{ $hasil->id_perkebunan }}">--Pilih Perkebunan--</option>
                                 @foreach ($perkebunan as $data)
                                     <option value="{{ $data->id_perkebunan }}">{{ $data->nama }}</option>
                                 @endforeach
@@ -46,7 +46,7 @@
                             <div class="mt-3">
                                 <label for="id_wilayah" class="form-label">Wilayah</label>
                                 <select name="id_wilayah" class="form-control">
-                                <option value="{{ $hasil->wilayah->nama }}">--Pilih Wilayah--</option>
+                                <option value="{{ $hasil->id_wilayah }}">--Pilih Wilayah--</option>
                                 @foreach ($wilayah as $data)
                                     <option value="{{ $data->id_wilayah }}">{{ $data->nama }}</option>
                                 @endforeach
@@ -89,7 +89,7 @@
                                 <div id="map" style="width: 100%; height: 500px;"></div>
                             </div>
                             {{-- <div class="text-right mt-5"> --}}
-                                <button type="submit" class="btn btn-primary w-24 mt-5">Tambah</button>
+                                <button type="submit" class="btn btn-primary w-24 mt-5">Edit</button>
                             {{-- </div> --}}
                         </form>
                         <!-- END: Form Layout -->
